@@ -13,16 +13,17 @@ html,body{margin:0;height:100%;overflow:hidden;background:#060b15;color:#eaf0fb;
   font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
 body{display:flex;align-items:center;justify-content:center;position:relative}
 body::before{content:'';position:fixed;inset:-6%;
-  background:linear-gradient(rgba(6,11,21,.84),rgba(6,11,21,.92)),
-  url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=70&w=1400&auto=format&fit=crop') center/cover #0a1322;
+  background:linear-gradient(rgba(6,11,21,.80),rgba(6,11,21,.90)),
+  var(--dcbg,none) center/cover #0a1322;
   filter:blur(12px)}
 
 /* ===== STAGE 9:16 (semua ukuran memakai em; font-size diatur lewat JS) ===== */
 #stage{position:relative;width:100vw;height:100vh;font-size:13px;overflow:hidden;background:#0c1628;
   box-shadow:0 0 70px rgba(0,0,0,.65);user-select:none;-webkit-user-select:none;touch-action:manipulation}
-.bg{position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(9,17,33,.86),rgba(9,17,33,.95)),
-  url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=70&w=900&auto=format&fit=crop') center/cover #0c1628}
+.bg{position:absolute;inset:0;overflow:hidden;background:#0c1628;z-index:0;pointer-events:none}
+.bg>svg{position:absolute;inset:0;width:100%;height:100%;display:block;filter:blur(1.1px) saturate(1.05)}
+.bg::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,15,30,.44),rgba(8,15,30,.56) 45%,rgba(8,15,30,.74))}
+.bg::after{z-index:2}
 .bg::after{content:'';position:absolute;inset:0;
   background:linear-gradient(115deg,transparent 30%,rgba(255,226,170,.07) 45%,transparent 60%);
   background-size:250% 100%;animation:sunsweep 14s ease-in-out infinite alternate}
@@ -63,8 +64,8 @@ body::before{content:'';position:fixed;inset:-6%;
   min-width:1.9em;height:1.9em;border-radius:1em;display:grid;place-items:center;animation:ping 1.8s ease-in-out infinite}
 @keyframes ping{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
 
-#welcome h1{margin:.1em 0 .15em;font-size:2.15em;line-height:1.05;font-weight:800;letter-spacing:-.02em;text-align:center}
-#welcome .sub{margin:0 0 1em;text-align:center;color:#9fb3d6;font-size:.92em}
+#welcome h1{margin:.1em 0 .15em;font-size:2.15em;line-height:1.05;font-weight:800;letter-spacing:-.02em;text-align:center;}
+#welcome .sub{margin:0 0 1em;text-align:center;color: #fff;font-size:.92em}
 #welcome p.t{margin:0 0 .8em;font-size:.9em;line-height:1.5;color:#cbd7ee}
 .mission{background:rgba(95,176,255,.12);border:.08em solid rgba(95,176,255,.35);border-radius:.9em;padding:.75em .9em;font-size:.86em;line-height:1.45;color:#dbe9ff;margin-bottom:1em}
 .field label{display:block;font-size:.82em;font-weight:600;color:#9fb3d6;margin-bottom:.35em}
@@ -189,17 +190,28 @@ body::before{content:'';position:fixed;inset:-6%;
 .col-head{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.84em;padding:.1em .35em .55em;color:#9fb3d6}
 .col-head b{background:#ff5d6c;color:#fff;border-radius:1em;min-width:1.7em;text-align:center;padding:.1em .5em;font-size:.95em}
 
-.deck{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0}
+.deck{flex:1;display:flex;align-items:flex-end;justify-content:center;position:relative;min-height:0;padding-bottom:2.6em}
 .deck-in{position:relative;width:100%}
-.ghost{position:absolute;inset:0;background:#dfe7f5;border-radius:1em}
-.g1{transform:translateY(.55em) rotate(2.6deg) scale(.97);opacity:.55}
-.g2{transform:translateY(1.1em) rotate(-3deg) scale(.94);opacity:.28}
-.card{position:relative;z-index:30;width:100%;background:#fff;color:#1b2740;border-radius:1em;padding:.8em .8em .75em;
-  box-shadow:0 .8em 1.6em rgba(0,0,0,.4);touch-action:none;cursor:grab;will-change:transform}
+.ghost{position:absolute;inset:0;background:linear-gradient(180deg,#c9945c,#a9753f);border:.08em solid #8f5f2e;border-radius:.4em;box-shadow:0 .2em .5em rgba(0,0,0,.35)}
+.g1{transform:translateY(.55em) rotate(2.6deg) scale(.97);opacity:.9}
+.g2{transform:translateY(1.1em) rotate(-3deg) scale(.94);opacity:.65}
+.card{position:relative;z-index:30;width:100%;color:#1b2740;border-radius:.4em;padding:1.1em .5em .4em;
+  background:repeating-linear-gradient(0deg,rgba(90,52,16,.06) 0 .1em,transparent .1em .42em),linear-gradient(180deg,#dcab72,#c78f56 60%,#b97f47);
+  border:.08em solid #a5703a;
+  box-shadow:0 .8em 1.6em rgba(0,0,0,.45),inset 0 .15em 0 rgba(255,255,255,.2);touch-action:none;cursor:grab;will-change:transform}
+.card .tape{position:absolute;left:0;right:0;top:0;height:.95em;border-radius:.35em .35em 0 0;background:linear-gradient(180deg,rgba(80,46,14,.3),rgba(80,46,14,.1));border-bottom:.08em solid rgba(80,46,14,.35)}
+.card .tape::after{content:'';position:absolute;left:50%;margin-left:-1.5em;top:0;width:3em;height:1.9em;background:linear-gradient(180deg,#f3e5ba,#e4d09a);box-shadow:0 .05em .12em rgba(0,0,0,.3);opacity:.94;border-radius:0 0 .1em .1em}
+.card .lbl{position:relative;z-index:1;background:#fffdf6;border-radius:.25em;padding:.5em .55em .5em;border:.06em solid #e8dcc2;box-shadow:0 .1em .25em rgba(60,30,5,.35)}
+.card .cfoot{display:flex;align-items:center;justify-content:center;gap:.7em;margin-top:.45em;height:.85em}
+.card .cfoot i{display:block;width:.8em;height:.8em;opacity:.6}
+.card .cfoot svg{display:block;width:100%;height:100%}
+.card::after{content:'';position:absolute;z-index:2;left:.3em;right:.3em;top:.4em;height:.16em;border-radius:1em;background:#ff3b4a;box-shadow:0 0 .55em .12em rgba(255,59,74,.85);opacity:0;pointer-events:none}
+.card.arrive::after{animation:scan .6s .1s ease-in-out}
+@keyframes scan{0%{top:.4em;opacity:1}85%{opacity:1}100%{top:calc(100% - .6em);opacity:0}}
 .card.dragging{cursor:grabbing;box-shadow:0 1.2em 2.2em rgba(0,0,0,.55);z-index:60}
 .card.sel{box-shadow:0 0 0 .22em #7cc4ff,0 .8em 1.6em rgba(0,0,0,.4);animation:wig .5s}
 .card.arrive{animation:arrive .55s cubic-bezier(.2,1.4,.4,1)}
-@keyframes arrive{from{opacity:0;transform:translateY(3em) rotate(5deg) scale(.9)}to{opacity:1}}
+@keyframes arrive{from{opacity:0;transform:translateX(-4.5em) rotate(-4deg)}to{opacity:1}}
 @keyframes wig{25%{margin-left:-.25em}75%{margin-left:.25em}}
 .card .hd{display:flex;gap:.5em;align-items:center;margin-bottom:.55em}
 .av{width:2.4em;height:2.4em;border-radius:50%;background:#e6f0ff;display:grid;place-items:center;font-size:1.15em;flex:0 0 auto}
@@ -208,14 +220,19 @@ body::before{content:'';position:fixed;inset:-6%;
 .who small{font-size:.68em;color:#6b7a96}
 .card p{margin:0;font-size:.95em;line-height:1.42}
 .card p em{font-style:normal;font-weight:700;color:#1d5fd1}
-.card .grip{margin:.65em auto 0;width:2.4em;height:.28em;border-radius:1em;background:#d5dceb}
+.card .grip{margin:0;width:2.6em;height:.5em;border-radius:1em;background:#6e431c;box-shadow:inset 0 .12em .12em rgba(0,0,0,.55),0 .06em 0 rgba(255,255,255,.25)}
+.belt{position:absolute;left:-.35em;right:-.35em;bottom:.9em;height:1.55em;border-radius:.45em;border:.12em solid #55627d;
+  background:repeating-linear-gradient(90deg,#2b3449 0 .9em,#3a4661 .9em 1.8em);background-size:1.8em 100%;
+  box-shadow:inset 0 .22em .3em rgba(0,0,0,.5),0 .28em 0 #151b2b,0 .55em .7em rgba(0,0,0,.5);animation:beltmove 1.1s linear infinite}
+.belt::after{content:'';position:absolute;left:.3em;right:.3em;bottom:-.55em;height:.5em;background:radial-gradient(circle at 50% 50%,#8f9bb3 .2em,transparent .24em) 0 0/1.4em .5em repeat-x}
+@keyframes beltmove{to{background-position:1.8em 0}}
 .hint{text-align:center;font-size:.78em;color:#9fb3d6;padding:.5em 0 .2em;flex:0 0 auto;line-height:1.3}
 .hint span{display:inline-block;animation:nudge 1.1s ease-in-out infinite;color:#7cc4ff;font-weight:800}
 @keyframes nudge{50%{transform:translateX(.45em)}}
 
 .levels{flex:1;display:flex;flex-direction:column;gap:.45em;min-height:0}
 .level{flex:1;min-height:0;position:relative;display:grid;grid-template-columns:2em 1fr;grid-template-rows:1fr auto;column-gap:.5em;
-  padding:.5em .55em;border-radius:.85em;background:var(--cs);border:.12em solid var(--cb);cursor:pointer;
+  padding:.5em .55em;border-radius:.85em;background:linear-gradient(var(--cs),var(--cs)),rgba(9,16,32,.84);border:.12em solid var(--cb);cursor:pointer;
   transition:transform .15s,background .2s,box-shadow .2s;animation:enter .5s cubic-bezier(.2,1.3,.4,1) both;animation-delay:var(--d,0s)}
 @keyframes enter{from{opacity:0;transform:translateX(2.2em)}to{opacity:1}}
 .badge{grid-area:1/1;align-self:start;width:2em;height:2em;border-radius:.6em;background:var(--c);color:#0b1424;font-weight:800;display:grid;place-items:center;font-size:1.05em}
@@ -225,15 +242,17 @@ body::before{content:'';position:fixed;inset:-6%;
 .info p{margin:.2em 0 0;font-size:.72em;line-height:1.22;color:#c4d0e6;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .slots{grid-area:2/1/3/3;display:flex;gap:.35em;margin-top:.3em}
 .slot{flex:1;min-width:0;height:2em;border-radius:.55em;border:.1em dashed rgba(255,255,255,.28);display:flex;align-items:center;gap:.3em;padding:0 .4em;font-size:.76em;white-space:nowrap;overflow:hidden}
+.slot{background:rgba(0,0,0,.22)}
 .slot .t{overflow:hidden;text-overflow:ellipsis}
+.level::before{content:'';position:absolute;left:.6em;right:.6em;top:-.14em;height:.22em;border-radius:1em;background:repeating-linear-gradient(135deg,var(--c) 0 .32em,#10182a .32em .64em);opacity:.95;pointer-events:none}
 .slot.full{border:0;background:var(--c);color:#0b1424;font-weight:700;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
 @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
 .level.armed{animation:armed 1.1s ease-in-out infinite}
 @keyframes armed{50%{box-shadow:0 0 0 .2em var(--cb),0 0 1.1em .1em var(--c)}}
-.level.hot{transform:scale(1.045);background:var(--cb);box-shadow:0 0 1.4em .2em var(--c);animation:none;z-index:5}
+.level.hot{transform:scale(1.045);background:linear-gradient(var(--cb),var(--cb)),rgba(9,16,32,.92);box-shadow:0 0 1.4em .2em var(--c);animation:none;z-index:5}
 .level.done{border-color:var(--c);box-shadow:0 0 1em var(--cs)}
 .level.done .badge{animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
-.level.shake{animation:shake .42s both;border-color:#ff5d6c;background:rgba(255,93,108,.22)}
+.level.shake{animation:shake .42s both;border-color:#ff5d6c;background:linear-gradient(rgba(255,93,108,.28),rgba(255,93,108,.28)),rgba(9,16,32,.92)}
 @keyframes shake{20%{transform:translateX(-.5em)}40%{transform:translateX(.5em)}60%{transform:translateX(-.35em)}80%{transform:translateX(.35em)}}
 
 .tip{flex:0 0 auto;text-align:center;font-size:.72em;color:#7f93b8;padding:.2em 1.2em .1em;line-height:1.35}
@@ -275,15 +294,110 @@ body::before{content:'';position:fixed;inset:-6%;
 .cf{position:absolute;top:-1em;width:.55em;height:.9em;z-index:95;pointer-events:none;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(60em) rotate(720deg);opacity:.9}}
 
+
+/* ===== PRESENTER (tokoh kartun) ===== */
+.pres{display:block;position:relative}
+.pres svg{display:block;width:100%;height:100%;overflow:visible}
+.pres .pa,.pres .m-grin,.pres .m-oops,.pres .brow-w,.pres .brow-u,.pres .sweat{display:none}
+.pres[data-pose=greet] .pa-greet,.pres[data-pose=point] .pa-point,.pres[data-pose=cheer] .pa-cheer,.pres[data-pose=cheer] .pa-cheer-f,.pres[data-pose=oops] .pa-oops{display:inline}
+.pres[data-pose=cheer] .m-smile,.pres[data-pose=oops] .m-smile{display:none}
+.pres[data-pose=cheer] .m-grin,.pres[data-pose=oops] .m-oops,.pres[data-pose=oops] .sweat,.pres[data-pose=cheer] .brow-u,.pres[data-pose=oops] .brow-w{display:inline}
+.pres[data-pose=cheer] .brow-n,.pres[data-pose=oops] .brow-n{display:none}
+.pres .eyes{transform-box:fill-box;transform-origin:50% 50%;animation:blink 5s infinite}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+.pres .pz{animation:bob 3.2s ease-in-out infinite}
+.pres.hop .pz{animation:hop .55s cubic-bezier(.3,1.5,.5,1),bob 3.2s ease-in-out .55s infinite}
+@keyframes bob{50%{transform:translateY(-1.2%)}}
+@keyframes hop{0%{transform:translateY(0)}35%{transform:translateY(-6%)}70%{transform:translateY(1.2%)}100%{transform:translateY(0)}}
+.say{position:relative;background:#fff;color:#1b2740;border-radius:.9em;padding:.55em .75em;font-weight:700;line-height:1.3;box-shadow:0 .35em .8em rgba(0,0,0,.35)}
+.say::after{content:'';position:absolute;width:.8em;height:.8em;background:#fff;transform:rotate(45deg);border-radius:.15em}
+.say.dn::after{bottom:-.3em;left:1.8em}
+.say.lf::after{left:-.3em;top:1.2em}
+.say.rt::after{right:-.3em;top:1.2em}
+.say b{color:#1d5fd1}
+.say.pop{animation:sayin .38s cubic-bezier(.3,1.6,.5,1)}
+@keyframes sayin{from{transform:scale(.75);opacity:0}to{transform:none;opacity:1}}
+
+/* kardus dekorasi */
+.bx{position:absolute;background:linear-gradient(180deg,#dcab72,#b97f47);border:.08em solid #9a6733;border-radius:.2em;box-shadow:0 .2em .45em rgba(0,0,0,.4)}
+.bx::after{content:'';position:absolute;left:50%;top:0;width:28%;margin-left:-14%;height:45%;background:#f1e2b6;opacity:.9}
+
+/* sambutan */
+#welcome .hero{height:12em;margin-bottom:.6em}
+#welcome .hp{position:absolute;left:50%;margin-left:-1.1em;bottom:0;width:8.9em;height:11.1em;z-index:1}
+#welcome .sw{position:absolute;left:0;top:.5em;width:10.2em;font-size:.8em;z-index:3}
+#welcome .tabs{z-index:2}
+#welcome .pile{position:absolute;right:.2em;bottom:1.45em;width:4.8em;height:4.2em;z-index:1}
+.pile .b1{left:0;bottom:0;width:2.9em;height:2em}
+.pile .b2{right:0;bottom:0;width:2.2em;height:1.6em}
+.pile .b3{left:.5em;bottom:2em;width:2.1em;height:1.45em}
+.pile .badge-n{right:-.5em;top:-.9em}
+
+/* contoh pengerjaan */
+.tut-head{display:flex;gap:.45em;align-items:flex-end;margin:.15em 0 .55em}
+.tp{flex:0 0 4.5em;width:4.5em;height:4.5em;clip-path:inset(-1.2em -1em 0 -1em)}
+.tp svg{width:4.5em;height:5.625em}
+.tut-head .say{flex:1;font-size:.78em;margin-bottom:.2em}
+.demo{height:18.5em}
+.dl{height:3em;padding:.22em .4em}
+.ds{height:.9em}
+.dghost{background:linear-gradient(180deg,#c9945c,#a9753f);border-radius:.35em}
+.dcard{background:linear-gradient(180deg,#dcab72,#c0864d);border:.08em solid #a5703a;border-radius:.35em;padding:.85em .4em .4em}
+.dcard .dtape{position:absolute;left:50%;margin-left:-1.2em;top:0;width:2.4em;height:1.4em;background:#f1e2b6;opacity:.92}
+.dcard .lbl{position:relative;z-index:1;background:#fffdf6;border-radius:.25em;padding:.4em .45em}
+.dl{background:linear-gradient(var(--cs),var(--cs)),rgba(9,16,32,.84)}
+.steps{gap:.45em;margin-bottom:.6em}
+.st{font-size:.8em}
+
+/* debrief: presenter bersorak */
+section#debrief{padding:1.5em 1em .6em;overflow:hidden}
+.dhero{display:flex;align-items:center;gap:.4em;margin:0 0 .45em;padding-right:2.3em}
+.dpw{position:relative;flex:0 0 7em;width:7em;height:6.6em}
+.dp{width:7em;height:6.6em;clip-path:inset(-1.4em -1em 0 -1em)}
+.dp svg{width:7em;height:8.75em}
+.dtro{position:absolute;left:3.05em;top:-.1em;font-size:1.6em;line-height:1;z-index:2;animation:pop .8s cubic-bezier(.2,1.7,.4,1);filter:drop-shadow(0 .1em .15em rgba(0,0,0,.4))}
+section#debrief .box{font-size:.8em}
+section#debrief .rc div{font-size:.96em}
+section#debrief .stat{padding:.35em .9em}
+.dhero .tx{min-width:0}
+#debrief .dhero h2{text-align:left;margin:0 0 .25em;font-size:1.2em}
+#debrief .dhero .lead{text-align:left;margin:0;font-size:.78em}
+
+/* game: pemandu di atas ban berjalan */
+.coach{flex:0 0 auto;display:flex;flex-direction:column;align-items:stretch;padding:0 .1em}
+.coach .say{font-size:.74em;margin:0 .1em .5em;min-height:2.9em;display:flex;align-items:center}
+.gp{width:7.2em;height:6.4em;clip-path:inset(-1.2em -1em 0 -1em);margin:0 auto 0 .2em}
+.gp svg{width:7.2em;height:9em}
+
+/* ===== Revisi 06: sambutan Pak Ale, konsep pusat sortir ===== */
+#welcome{padding-top:2.2em}
+#welcome h1{font-size:1.28em;text-align:left;margin:0 2.8em .05em 0;letter-spacing:-.01em;line-height:1.1}
+#welcome .sub{text-align:left;margin:.2em 2.8em .3em 0;font-size:.78em}
+#welcome .hero{height:18.6em;margin-bottom:.9em}
+#welcome .hp{width:13.2em;height:16.5em;margin-left:-2.3em}
+#welcome .sw{width:9.8em;top:2.4em;font-size:.9em}
+#welcome .pile{bottom:1.45em;right:0}
+.say.up::after{top:-.3em;left:46%}
+#welcome .task{font-size:.86em;line-height:1.42;margin:0 0 .9em;padding:.7em .85em}
+.coach{position:relative}
+.coach .nm{position:absolute;right:.3em;bottom:.7em;background:#f2bd42;color:#1b1405;font-weight:800;font-size:.74em;padding:.25em .8em;border-radius:2em;box-shadow:0 .2em .5em rgba(0,0,0,.4)}
+
 @media (prefers-reduced-motion:reduce){
   .bg::after,.mc,.tabs b,.badge-n,.hint span,.level.armed,.dcard,.dhand,.dl.t1{animation:none!important}
   .dfill,.dtoast{animation:none!important;opacity:1!important}
+  .belt,.pres .pz,.pres.hop .pz,.pres .eyes,.card.arrive::after{animation:none!important}
 }
 </style>
 </head>
 <body>
 <div id="stage">
-  <div class="bg"></div>
+  <div class="bg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 640" preserveAspectRatio="xMidYMid slice" width="100%" height="100%"><defs>
+<linearGradient id="dcWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a44"/><stop offset="1" stop-color="#2a3c5c"/></linearGradient>
+<linearGradient id="dcFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a566b"/><stop offset=".45" stop-color="#6c7a90"/><stop offset="1" stop-color="#586579"/></linearGradient>
+<linearGradient id="dcCeil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a1020"/><stop offset="1" stop-color="#1a2640"/></linearGradient>
+<radialGradient id="dcGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff6d6" stop-opacity=".9"/><stop offset="1" stop-color="#fff6d6" stop-opacity="0"/></radialGradient>
+<linearGradient id="dcDoor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a97ab"/><stop offset="1" stop-color="#5c6a80"/></linearGradient>
+</defs><rect width="360" height="640" fill="url(#dcWall)"/><polygon points="0,0 360,0 360,-1138.0 223.8,203.7 136.2,203.7 0,-1138.0" fill="url(#dcCeil)"/><polygon points="0,640 360,640 360,262.0 223.8,278.7 136.2,278.7 0,262" fill="url(#dcFloor)"/><rect x="141.5" y="245.3" width="16.7" height="33.3" fill="url(#dcDoor)" stroke="#2c3850" stroke-width=".8"/><line x1="141.5" x2="158.1" y1="250.1" y2="250.1" stroke="#4c5a72" stroke-width=".6"/><line x1="141.5" x2="158.1" y1="254.9" y2="254.9" stroke="#4c5a72" stroke-width=".6"/><line x1="141.5" x2="158.1" y1="259.6" y2="259.6" stroke="#4c5a72" stroke-width=".6"/><line x1="141.5" x2="158.1" y1="264.4" y2="264.4" stroke="#4c5a72" stroke-width=".6"/><line x1="141.5" x2="158.1" y1="269.1" y2="269.1" stroke="#4c5a72" stroke-width=".6"/><line x1="141.5" x2="158.1" y1="273.9" y2="273.9" stroke="#4c5a72" stroke-width=".6"/><rect x="144.8" y="236.3" width="10" height="7" rx="1" fill="#f2bd42"/><text x="149.8" y="241.9" font-size="5.5" font-weight="800" text-anchor="middle" fill="#1b1405" font-family="sans-serif">1</text><rect x="160.2" y="245.3" width="16.7" height="33.3" fill="url(#dcDoor)" stroke="#2c3850" stroke-width=".8"/><line x1="160.2" x2="176.9" y1="250.1" y2="250.1" stroke="#4c5a72" stroke-width=".6"/><line x1="160.2" x2="176.9" y1="254.9" y2="254.9" stroke="#4c5a72" stroke-width=".6"/><line x1="160.2" x2="176.9" y1="259.6" y2="259.6" stroke="#4c5a72" stroke-width=".6"/><line x1="160.2" x2="176.9" y1="264.4" y2="264.4" stroke="#4c5a72" stroke-width=".6"/><line x1="160.2" x2="176.9" y1="269.1" y2="269.1" stroke="#4c5a72" stroke-width=".6"/><line x1="160.2" x2="176.9" y1="273.9" y2="273.9" stroke="#4c5a72" stroke-width=".6"/><rect x="163.5" y="236.3" width="10" height="7" rx="1" fill="#f2bd42"/><text x="168.5" y="241.9" font-size="5.5" font-weight="800" text-anchor="middle" fill="#1b1405" font-family="sans-serif">2</text><rect x="179.0" y="245.3" width="16.7" height="33.3" fill="url(#dcDoor)" stroke="#2c3850" stroke-width=".8"/><line x1="179.0" x2="195.6" y1="250.1" y2="250.1" stroke="#4c5a72" stroke-width=".6"/><line x1="179.0" x2="195.6" y1="254.9" y2="254.9" stroke="#4c5a72" stroke-width=".6"/><line x1="179.0" x2="195.6" y1="259.6" y2="259.6" stroke="#4c5a72" stroke-width=".6"/><line x1="179.0" x2="195.6" y1="264.4" y2="264.4" stroke="#4c5a72" stroke-width=".6"/><line x1="179.0" x2="195.6" y1="269.1" y2="269.1" stroke="#4c5a72" stroke-width=".6"/><line x1="179.0" x2="195.6" y1="273.9" y2="273.9" stroke="#4c5a72" stroke-width=".6"/><rect x="182.3" y="236.3" width="10" height="7" rx="1" fill="#f2bd42"/><text x="187.3" y="241.9" font-size="5.5" font-weight="800" text-anchor="middle" fill="#1b1405" font-family="sans-serif">3</text><rect x="197.7" y="245.3" width="16.7" height="33.3" fill="url(#dcDoor)" stroke="#2c3850" stroke-width=".8"/><line x1="197.7" x2="214.4" y1="250.1" y2="250.1" stroke="#4c5a72" stroke-width=".6"/><line x1="197.7" x2="214.4" y1="254.9" y2="254.9" stroke="#4c5a72" stroke-width=".6"/><line x1="197.7" x2="214.4" y1="259.6" y2="259.6" stroke="#4c5a72" stroke-width=".6"/><line x1="197.7" x2="214.4" y1="264.4" y2="264.4" stroke="#4c5a72" stroke-width=".6"/><line x1="197.7" x2="214.4" y1="269.1" y2="269.1" stroke="#4c5a72" stroke-width=".6"/><line x1="197.7" x2="214.4" y1="273.9" y2="273.9" stroke="#4c5a72" stroke-width=".6"/><rect x="201.0" y="236.3" width="10" height="7" rx="1" fill="#f2bd42"/><text x="206.0" y="241.9" font-size="5.5" font-weight="800" text-anchor="middle" fill="#1b1405" font-family="sans-serif">4</text><line x1="-476.2" x2="836.2" y1="-613.0" y2="-613.0" stroke="#2b3b5d" stroke-width="4.0"/><line x1="-170.0" x2="530.0" y1="-204.7" y2="-204.7" stroke="#2b3b5d" stroke-width="2.1"/><line x1="-53.3" x2="413.3" y1="-49.1" y2="-49.1" stroke="#2b3b5d" stroke-width="1.4"/><line x1="18.5" x2="341.5" y1="46.6" y2="46.6" stroke="#2b3b5d" stroke-width="1.0"/><line x1="63.3" x2="296.7" y1="106.4" y2="106.4" stroke="#2b3b5d" stroke-width="0.7"/><line x1="92.5" x2="267.5" y1="145.3" y2="145.3" stroke="#2b3b5d" stroke-width="0.6"/><line x1="114.4" x2="245.6" y1="174.5" y2="174.5" stroke="#2b3b5d" stroke-width="0.6"/><line x1="127.5" x2="232.5" y1="192.0" y2="192.0" stroke="#2b3b5d" stroke-width="0.6"/><line x1="135.3" x2="224.7" y1="202.4" y2="202.4" stroke="#2b3b5d" stroke-width="0.6"/><ellipse cx="-1.8" cy="-350.6" rx="175.0" ry="87.5" fill="url(#dcGlow)" opacity=".75"/><rect x="-81.4" y="-352.6" width="159.1" height="19.1" rx=".8" fill="#fffbe8"/><ellipse cx="361.8" cy="-350.6" rx="175.0" ry="87.5" fill="url(#dcGlow)" opacity=".75"/><rect x="282.3" y="-352.6" width="159.1" height="19.1" rx=".8" fill="#fffbe8"/><ellipse cx="80.0" cy="-74.5" rx="96.3" ry="48.1" fill="url(#dcGlow)" opacity=".75"/><rect x="36.2" y="-76.5" width="87.5" height="10.5" rx=".8" fill="#fffbe8"/><ellipse cx="280.0" cy="-74.5" rx="96.3" ry="48.1" fill="url(#dcGlow)" opacity=".75"/><rect x="236.2" y="-76.5" width="87.5" height="10.5" rx=".8" fill="#fffbe8"/><ellipse cx="118.5" cy="55.3" rx="59.2" ry="29.6" fill="url(#dcGlow)" opacity=".75"/><rect x="91.5" y="53.3" width="53.8" height="6.5" rx=".8" fill="#fffbe8"/><ellipse cx="241.5" cy="55.3" rx="59.2" ry="29.6" fill="url(#dcGlow)" opacity=".75"/><rect x="214.6" y="53.3" width="53.8" height="6.5" rx=".8" fill="#fffbe8"/><ellipse cx="140.0" cy="128.0" rx="38.5" ry="19.2" fill="url(#dcGlow)" opacity=".75"/><rect x="122.5" y="126.0" width="35.0" height="4.2" rx=".8" fill="#fffbe8"/><ellipse cx="220.0" cy="128.0" rx="38.5" ry="19.2" fill="url(#dcGlow)" opacity=".75"/><rect x="202.5" y="126.0" width="35.0" height="4.2" rx=".8" fill="#fffbe8"/><ellipse cx="152.4" cy="169.9" rx="26.6" ry="13.3" fill="url(#dcGlow)" opacity=".75"/><rect x="140.3" y="167.9" width="24.1" height="2.9" rx=".8" fill="#fffbe8"/><ellipse cx="207.6" cy="169.9" rx="26.6" ry="13.3" fill="url(#dcGlow)" opacity=".75"/><rect x="195.5" y="167.9" width="24.1" height="2.9" rx=".8" fill="#fffbe8"/><ellipse cx="160.0" cy="195.5" rx="19.2" ry="9.6" fill="url(#dcGlow)" opacity=".75"/><rect x="151.2" y="193.5" width="17.5" height="2.1" rx=".8" fill="#fffbe8"/><ellipse cx="200.0" cy="195.5" rx="19.2" ry="9.6" fill="url(#dcGlow)" opacity=".75"/><rect x="191.2" y="193.5" width="17.5" height="2.1" rx=".8" fill="#fffbe8"/><polygon points="-257.5,662.0 161.8,278.7 163.2,278.7 -222.5,662.0" fill="#f2bd42" opacity=".9"/><polygon points="617.5,662.0 198.2,278.7 199.7,278.7 652.5,662.0" fill="#f2bd42" opacity=".9"/><line x1="-695.0" x2="1055.0" y1="595.3" y2="595.3" stroke="#3b475b" stroke-width=".7" opacity=".7"/><line x1="-476.2" x2="836.2" y1="512.0" y2="512.0" stroke="#3b475b" stroke-width=".7" opacity=".7"/><line x1="-320.0" x2="680.0" y1="452.5" y2="452.5" stroke="#3b475b" stroke-width=".7" opacity=".7"/><line x1="-195.0" x2="555.0" y1="404.9" y2="404.9" stroke="#3b475b" stroke-width=".7" opacity=".7"/><line x1="-96.3" x2="456.3" y1="367.3" y2="367.3" stroke="#3b475b" stroke-width=".7" opacity=".7"/><line x1="-10.9" x2="370.9" y1="334.7" y2="334.7" stroke="#3b475b" stroke-width=".7" opacity=".7"/><line x1="48.8" x2="311.2" y1="312.0" y2="312.0" stroke="#3b475b" stroke-width=".7" opacity=".7"/><line x1="92.5" x2="267.5" y1="295.3" y2="295.3" stroke="#3b475b" stroke-width=".7" opacity=".7"/><line x1="121.7" x2="238.3" y1="284.2" y2="284.2" stroke="#3b475b" stroke-width=".7" opacity=".7"/><ellipse cx="180" cy="389.0" rx="70.3" ry="15.6" fill="#ffffff" opacity=".07"/><ellipse cx="180" cy="325.5" rx="34.6" ry="7.7" fill="#ffffff" opacity=".07"/><ellipse cx="180" cy="300.4" rx="20.5" ry="4.5" fill="#ffffff" opacity=".07"/><polygon points="173.8,428.7 186.2,428.7 184.2,373.1 175.8,373.1" fill="#e8edf5" opacity=".55"/><polygon points="175.8,373.1 184.2,373.1 183.1,345.3 176.9,345.3" fill="#e8edf5" opacity=".55"/><polygon points="177.1,338.9 182.9,338.9 182.3,324.5 177.7,324.5" fill="#e8edf5" opacity=".55"/><polygon points="178.0,315.3 182.0,315.3 181.7,308.0 178.3,308.0" fill="#e8edf5" opacity=".55"/><polygon points="178.6,300.1 181.4,300.1 181.3,296.2 178.7,296.2" fill="#e8edf5" opacity=".55"/><polygon points="179.0,289.6 181.0,289.6 181.0,287.5 179.0,287.5" fill="#e8edf5" opacity=".55"/><polygon points="179.2,283.1 180.8,283.1 180.7,281.8 179.3,281.8" fill="#e8edf5" opacity=".55"/><polygon points="-274.5,625.6 -274.5,-715.3 160.1,219.2 160.1,277.9" fill="#0f1a2e"/><polygon points="158.1,275.7 158.9,275.2 158.9,263.6 158.1,263.6" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="158.5" y1="263.6" x2="158.5" y2="266.9" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><rect x="157.0" y="270.1" width="3.1" height="2.1" fill="#f6f1e4" opacity=".92"/><polygon points="159.0,275.1 159.5,274.8 159.5,269.2 159.0,269.3" fill="#8e653d" stroke="#63462a" stroke-width=".4"/><line x1="159.2" y1="269.3" x2="159.2" y2="270.9" stroke="#e9d5a8" stroke-width="0.8" opacity=".85"/><rect x="157.8" y="272.4" width="2.9" height="2.1" fill="#f6f1e4" opacity=".92"/><polygon points="159.0,258.3 159.5,258.4 159.5,252.8 159.0,252.6" fill="#8e653d" stroke="#63462a" stroke-width=".4"/><line x1="159.2" y1="252.7" x2="159.2" y2="254.3" stroke="#e9d5a8" stroke-width="0.8" opacity=".85"/><rect x="157.8" y="255.8" width="2.9" height="2.1" fill="#f6f1e4" opacity=".92"/><polygon points="159.5,258.4 160.0,258.5 160.0,247.5 159.5,247.1" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="159.7" y1="247.3" x2="159.7" y2="250.4" stroke="#e9d5a8" stroke-width="0.8" opacity=".85"/><polygon points="158.1,240.6 158.7,241.3 158.7,233.8 158.1,233.0" fill="#8e653d" stroke="#63462a" stroke-width=".4"/><line x1="158.4" y1="233.4" x2="158.4" y2="235.5" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><rect x="156.9" y="237.6" width="3.1" height="2.1" fill="#f6f1e4" opacity=".92"/><polygon points="159.4,241.9 160.0,242.5 160.0,229.5 159.4,228.6" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="159.7" y1="229.0" x2="159.7" y2="232.7" stroke="#e9d5a8" stroke-width="0.8" opacity=".85"/><polygon points="158.1,223.1 158.7,224.3 158.7,216.3 158.1,214.9" fill="#835a33" stroke="#5b3e23" stroke-width=".4"/><line x1="158.4" y1="215.6" x2="158.4" y2="217.9" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><polygon points="158.8,224.4 159.7,225.9 159.7,221.5 158.8,219.8" fill="#89613a" stroke="#5f4328" stroke-width=".4"/><line x1="159.3" y1="220.7" x2="159.3" y2="221.9" stroke="#e9d5a8" stroke-width="0.8" opacity=".85"/><line x1="158.0" y1="279.6" x2="158.0" y2="214.6" stroke="#1f56b3" stroke-width="1.1"/><polygon points="155.5,277.3 156.5,276.7 156.5,266.1 155.5,266.3" fill="#835a33" stroke="#5b3e23" stroke-width=".4"/><line x1="156.0" y1="266.2" x2="156.0" y2="269.2" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><rect x="154.3" y="272.1" width="3.4" height="2.4" fill="#f6f1e4" opacity=".92"/><polygon points="156.5,276.7 157.1,276.3 157.1,268.3 156.5,268.5" fill="#97744c" stroke="#695135" stroke-width=".4"/><line x1="156.8" y1="268.4" x2="156.8" y2="270.6" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><rect x="155.2" y="272.8" width="3.3" height="2.3" fill="#f6f1e4" opacity=".92"/><polygon points="155.5,257.7 156.2,257.8 156.2,251.3 155.5,251.0" fill="#8e653d" stroke="#63462a" stroke-width=".4"/><line x1="155.8" y1="251.1" x2="155.8" y2="253.0" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><polygon points="156.2,257.8 157.2,258.0 157.2,243.2 156.2,242.4" fill="#835a33" stroke="#5b3e23" stroke-width=".4"/><line x1="156.7" y1="242.8" x2="156.7" y2="247.0" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><polygon points="157.3,258.0 157.8,258.1 157.8,248.1 157.3,247.8" fill="#835a33" stroke="#5b3e23" stroke-width=".4"/><line x1="157.5" y1="248.0" x2="157.5" y2="250.8" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><polygon points="155.5,238.1 156.2,238.8 156.2,228.0 155.5,227.1" fill="#8e653d" stroke="#63462a" stroke-width=".4"/><line x1="155.8" y1="227.6" x2="155.8" y2="230.6" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><polygon points="156.2,238.8 157.2,239.7 157.2,229.5 156.2,228.2" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="156.7" y1="228.8" x2="156.7" y2="231.8" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><polygon points="155.5,218.5 156.2,219.7 156.2,214.5 155.5,213.2" fill="#97744c" stroke="#695135" stroke-width=".4"/><line x1="155.8" y1="213.9" x2="155.8" y2="215.3" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><rect x="154.2" y="216.8" width="3.4" height="2.4" fill="#f6f1e4" opacity=".92"/><polygon points="156.2,219.8 157.3,221.7 157.3,213.9 156.2,211.6" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="156.8" y1="212.8" x2="156.8" y2="215.0" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><rect x="155.1" y="217.3" width="3.3" height="2.3" fill="#f6f1e4" opacity=".92"/><line x1="155.4" y1="281.7" x2="155.4" y2="209.0" stroke="#1f56b3" stroke-width="1.2"/><polygon points="152.3,279.3 153.3,278.7 153.3,261.3 152.3,261.3" fill="#9f7950" stroke="#6f5438" stroke-width=".4"/><line x1="152.8" y1="261.3" x2="152.8" y2="266.3" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><polygon points="153.4,278.6 154.7,277.8 154.7,268.9 153.4,269.3" fill="#956d43" stroke="#684c2e" stroke-width=".4"/><line x1="154.1" y1="269.1" x2="154.1" y2="271.7" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><rect x="152.3" y="274.1" width="3.7" height="2.6" fill="#f6f1e4" opacity=".92"/><polygon points="152.3,257.1 153.1,257.3 153.1,239.8 152.3,239.1" fill="#8f653c" stroke="#64462a" stroke-width=".4"/><line x1="152.7" y1="239.5" x2="152.7" y2="244.4" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><rect x="150.8" y="249.2" width="3.9" height="2.7" fill="#f6f1e4" opacity=".92"/><polygon points="153.1,257.3 154.1,257.5 154.1,245.8 153.1,245.2" fill="#93683f" stroke="#66482c" stroke-width=".4"/><line x1="153.6" y1="245.5" x2="153.6" y2="248.8" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><polygon points="154.2,257.5 154.9,257.6 154.9,241.3 154.2,240.7" fill="#855b34" stroke="#5d3f24" stroke-width=".4"/><line x1="154.5" y1="241.0" x2="154.5" y2="245.6" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><rect x="152.7" y="250.1" width="3.6" height="2.5" fill="#f6f1e4" opacity=".92"/><polygon points="152.3,234.9 153.1,235.7 153.1,220.9 152.3,219.7" fill="#986f44" stroke="#6a4d2f" stroke-width=".4"/><line x1="152.7" y1="220.3" x2="152.7" y2="224.5" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><rect x="150.8" y="228.6" width="3.9" height="2.7" fill="#f6f1e4" opacity=".92"/><polygon points="153.1,235.8 154.5,237.1 154.5,225.7 153.1,223.7" fill="#93683f" stroke="#66482c" stroke-width=".4"/><line x1="153.8" y1="224.7" x2="153.8" y2="228.0" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><rect x="152.0" y="231.3" width="3.8" height="2.6" fill="#f6f1e4" opacity=".92"/><polygon points="152.3,212.7 153.1,214.2 153.1,204.1 152.3,202.3" fill="#986f44" stroke="#6a4d2f" stroke-width=".4"/><line x1="152.7" y1="203.2" x2="152.7" y2="206.1" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><rect x="150.8" y="209.0" width="3.9" height="2.7" fill="#f6f1e4" opacity=".92"/><polygon points="153.1,214.3 154.5,216.7 154.5,209.6 153.1,206.8" fill="#9c774f" stroke="#6d5337" stroke-width=".4"/><line x1="153.8" y1="208.3" x2="153.8" y2="210.3" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><line x1="152.1" y1="284.3" x2="152.1" y2="201.9" stroke="#1f56b3" stroke-width="1.4"/><polygon points="148.0,282.0 149.1,281.3 149.1,264.3 148.0,264.4" fill="#926439" stroke="#664627" stroke-width=".4"/><line x1="148.5" y1="264.4" x2="148.5" y2="269.2" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><polygon points="150.4,280.5 151.8,279.6 151.8,264.1 150.4,264.2" fill="#93683e" stroke="#66482b" stroke-width=".4"/><line x1="151.2" y1="264.2" x2="151.2" y2="268.6" stroke="#e9d5a8" stroke-width="1.2" opacity=".85"/><polygon points="148.0,256.4 149.6,256.7 149.6,237.0 148.0,235.6" fill="#a17648" stroke="#705232" stroke-width=".4"/><line x1="148.8" y1="236.3" x2="148.8" y2="242.0" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><polygon points="149.8,256.7 150.8,256.9 150.8,243.7 149.8,243.1" fill="#9b6e43" stroke="#6c4d2e" stroke-width=".4"/><line x1="150.3" y1="243.4" x2="150.3" y2="247.2" stroke="#e9d5a8" stroke-width="1.2" opacity=".85"/><rect x="148.2" y="250.8" width="4.2" height="3.0" fill="#f6f1e4" opacity=".92"/><polygon points="148.0,230.8 149.4,232.1 149.4,212.2 148.0,210.0" fill="#a88155" stroke="#755a3b" stroke-width=".4"/><line x1="148.7" y1="211.1" x2="148.7" y2="216.8" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><polygon points="149.6,232.4 150.9,233.6 150.9,217.6 149.6,215.7" fill="#95693f" stroke="#68492c" stroke-width=".4"/><line x1="150.3" y1="216.7" x2="150.3" y2="221.2" stroke="#e9d5a8" stroke-width="1.2" opacity=".85"/><rect x="148.2" y="225.7" width="4.3" height="3.0" fill="#f6f1e4" opacity=".92"/><polygon points="148.0,205.2 149.1,207.1 149.1,198.5 148.0,196.2" fill="#926439" stroke="#664627" stroke-width=".4"/><line x1="148.5" y1="197.4" x2="148.5" y2="199.8" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><rect x="146.4" y="202.3" width="4.5" height="3.1" fill="#f6f1e4" opacity=".92"/><polygon points="149.4,207.6 150.9,210.3 150.9,202.2 149.4,199.1" fill="#a57f54" stroke="#73583a" stroke-width=".4"/><line x1="150.1" y1="200.7" x2="150.1" y2="203.0" stroke="#e9d5a8" stroke-width="1.2" opacity=".85"/><rect x="148.1" y="205.4" width="4.3" height="3.0" fill="#f6f1e4" opacity=".92"/><line x1="147.7" y1="287.8" x2="147.7" y2="192.6" stroke="#1f56b3" stroke-width="1.6"/><polygon points="142.2,285.6 144.8,284.0 144.8,271.7 142.2,272.4" fill="#9a6a3c" stroke="#6b4a2a" stroke-width=".4"/><line x1="143.6" y1="272.0" x2="143.6" y2="275.6" stroke="#e9d5a8" stroke-width="1.5" opacity=".85"/><polygon points="145.2,283.7 146.5,282.9 146.5,267.9 145.2,268.1" fill="#a67a4a" stroke="#745533" stroke-width=".4"/><line x1="145.9" y1="268.0" x2="145.9" y2="272.3" stroke="#e9d5a8" stroke-width="1.4" opacity=".85"/><polygon points="142.2,255.4 144.1,255.7 144.1,243.1 142.2,242.1" fill="#9a6a3c" stroke="#6b4a2a" stroke-width=".4"/><line x1="143.2" y1="242.7" x2="143.2" y2="246.3" stroke="#e9d5a8" stroke-width="1.5" opacity=".85"/><polygon points="144.3,255.8 145.6,256.0 145.6,237.1 144.3,236.1" fill="#97683b" stroke="#694829" stroke-width=".4"/><line x1="145.0" y1="236.6" x2="145.0" y2="242.0" stroke="#e9d5a8" stroke-width="1.4" opacity=".85"/><rect x="142.5" y="247.2" width="5.0" height="3.5" fill="#f6f1e4" opacity=".92"/><polygon points="145.7,256.0 147.3,256.3 147.3,244.8 145.7,244.0" fill="#a5794a" stroke="#735433" stroke-width=".4"/><line x1="146.5" y1="244.4" x2="146.5" y2="247.7" stroke="#e9d5a8" stroke-width="1.4" opacity=".85"/><rect x="144.2" y="250.9" width="4.8" height="3.4" fill="#f6f1e4" opacity=".92"/><polygon points="142.2,225.1 144.1,227.0 144.1,203.6 142.2,200.5" fill="#9a6a3c" stroke="#6b4a2a" stroke-width=".4"/><line x1="143.2" y1="202.1" x2="143.2" y2="208.8" stroke="#e9d5a8" stroke-width="1.5" opacity=".85"/><polygon points="144.3,227.2 146.0,228.8 146.0,216.9 144.3,214.7" fill="#a77b4b" stroke="#745634" stroke-width=".4"/><line x1="145.2" y1="215.8" x2="145.2" y2="219.2" stroke="#e9d5a8" stroke-width="1.4" opacity=".85"/><rect x="142.7" y="222.6" width="5.0" height="3.5" fill="#f6f1e4" opacity=".92"/><polygon points="146.3,229.2 147.5,230.3 147.5,219.0 146.3,217.4" fill="#94663a" stroke="#674728" stroke-width=".4"/><line x1="146.9" y1="218.2" x2="146.9" y2="221.4" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><polygon points="144.1,198.2 145.8,201.3 145.8,193.9 144.1,190.4" fill="#a57547" stroke="#735131" stroke-width=".4"/><line x1="145.0" y1="192.2" x2="145.0" y2="194.3" stroke="#e9d5a8" stroke-width="1.4" opacity=".85"/><rect x="142.5" y="196.5" width="5.0" height="3.5" fill="#f6f1e4" opacity=".92"/><line x1="141.8" y1="292.5" x2="141.8" y2="179.9" stroke="#1f56b3" stroke-width="1.9"/><polygon points="136.6,289.1 139.6,287.3 139.6,261.0 136.6,260.9" fill="#ae7c4b" stroke="#795634" stroke-width=".4"/><line x1="138.1" y1="261.0" x2="138.1" y2="268.6" stroke="#e9d5a8" stroke-width="1.7" opacity=".85"/><rect x="135.3" y="275.9" width="6.1" height="4.3" fill="#f6f1e4" opacity=".92"/><polygon points="133.8,253.9 136.6,254.4 136.6,242.5 133.8,241.2" fill="#a2703f" stroke="#714e2c" stroke-width=".4"/><line x1="135.2" y1="241.9" x2="135.2" y2="245.3" stroke="#e9d5a8" stroke-width="1.8" opacity=".85"/><polygon points="137.2,254.5 139.1,254.8 139.1,240.5 137.2,239.5" fill="#a67646" stroke="#745231" stroke-width=".4"/><line x1="138.1" y1="240.0" x2="138.1" y2="244.1" stroke="#e9d5a8" stroke-width="1.7" opacity=".85"/><rect x="135.2" y="248.1" width="6.0" height="4.2" fill="#f6f1e4" opacity=".92"/><polygon points="139.6,254.9 141.3,255.2 141.3,237.8 139.6,236.7" fill="#ab7949" stroke="#775433" stroke-width=".4"/><line x1="140.5" y1="237.3" x2="140.5" y2="242.3" stroke="#e9d5a8" stroke-width="1.6" opacity=".85"/><polygon points="133.8,216.9 136.0,219.1 136.0,207.0 133.8,204.2" fill="#aa7847" stroke="#765431" stroke-width=".4"/><line x1="134.9" y1="205.7" x2="134.9" y2="209.1" stroke="#e9d5a8" stroke-width="1.8" opacity=".85"/><rect x="131.8" y="212.6" width="6.5" height="4.5" fill="#f6f1e4" opacity=".92"/><polygon points="136.2,219.3 138.2,221.2 138.2,194.1 136.2,190.8" fill="#b1824f" stroke="#7b5b37" stroke-width=".4"/><line x1="137.2" y1="192.5" x2="137.2" y2="200.3" stroke="#e9d5a8" stroke-width="1.8" opacity=".85"/><polygon points="138.3,221.4 141.5,224.5 141.5,199.5 138.3,194.3" fill="#ac7a4a" stroke="#785533" stroke-width=".4"/><line x1="140.0" y1="197.0" x2="140.0" y2="204.3" stroke="#e9d5a8" stroke-width="1.7" opacity=".85"/><polygon points="133.8,180.0 137.2,186.0 137.2,169.9 133.8,162.6" fill="#a2703f" stroke="#714e2c" stroke-width=".4"/><line x1="135.5" y1="166.4" x2="135.5" y2="171.1" stroke="#e9d5a8" stroke-width="1.8" opacity=".85"/><polygon points="137.3,186.2 140.2,191.3 140.2,182.7 137.3,176.9" fill="#9f6e3e" stroke="#6f4d2b" stroke-width=".4"/><line x1="138.8" y1="179.9" x2="138.8" y2="182.4" stroke="#e9d5a8" stroke-width="1.7" opacity=".85"/><rect x="136.0" y="185.1" width="6.0" height="4.2" fill="#f6f1e4" opacity=".92"/><line x1="133.3" y1="299.4" x2="133.3" y2="161.5" stroke="#1f56b3" stroke-width="2.3"/><polygon points="120.6,299.1 126.9,295.2 126.9,276.6 120.6,278.3" fill="#ab7643" stroke="#77522e" stroke-width=".4"/><line x1="123.9" y1="277.4" x2="123.9" y2="282.9" stroke="#e9d5a8" stroke-width="2.4" opacity=".85"/><rect x="120.1" y="288.1" width="8.3" height="5.8" fill="#f6f1e4" opacity=".92"/><polygon points="127.8,294.7 132.0,292.0 132.0,275.2 127.8,276.4" fill="#c19361" stroke="#876643" stroke-width=".4"/><line x1="130.0" y1="275.8" x2="130.0" y2="280.7" stroke="#e9d5a8" stroke-width="2.1" opacity=".85"/><rect x="126.5" y="285.3" width="7.3" height="5.1" fill="#f6f1e4" opacity=".92"/><polygon points="120.6,251.6 126.9,252.7 126.9,238.1 120.6,235.3" fill="#ab7643" stroke="#77522e" stroke-width=".4"/><line x1="123.9" y1="236.8" x2="123.9" y2="241.1" stroke="#e9d5a8" stroke-width="2.4" opacity=".85"/><polygon points="127.1,252.8 130.8,253.4 130.8,226.3 127.1,223.7" fill="#b6814e" stroke="#7f5a36" stroke-width=".4"/><line x1="129.0" y1="225.0" x2="129.0" y2="232.9" stroke="#e9d5a8" stroke-width="2.1" opacity=".85"/><rect x="125.5" y="240.5" width="7.4" height="5.2" fill="#f6f1e4" opacity=".92"/><polygon points="120.6,204.1 126.1,209.4 126.1,185.1 120.6,177.4" fill="#bd8b55" stroke="#84613b" stroke-width=".4"/><line x1="123.5" y1="181.4" x2="123.5" y2="188.6" stroke="#e9d5a8" stroke-width="2.4" opacity=".85"/><rect x="119.6" y="195.8" width="8.3" height="5.8" fill="#f6f1e4" opacity=".92"/><polygon points="126.5,209.9 131.7,214.9 131.7,188.3 126.5,180.4" fill="#c19462" stroke="#876744" stroke-width=".4"/><line x1="129.2" y1="184.6" x2="129.2" y2="192.4" stroke="#e9d5a8" stroke-width="2.1" opacity=".85"/><polygon points="124.3,163.1 128.3,170.2 128.3,161.4 124.3,153.5" fill="#bb8954" stroke="#825f3a" stroke-width=".4"/><line x1="126.4" y1="157.6" x2="126.4" y2="160.2" stroke="#e9d5a8" stroke-width="2.2" opacity=".85"/><rect x="122.7" y="163.0" width="7.8" height="5.5" fill="#f6f1e4" opacity=".92"/><polygon points="128.5,170.6 132.0,176.7 132.0,166.3 128.5,159.4" fill="#a67341" stroke="#74502d" stroke-width=".4"/><line x1="130.3" y1="163.0" x2="130.3" y2="166.0" stroke="#e9d5a8" stroke-width="2.1" opacity=".85"/><line x1="119.8" y1="310.2" x2="119.8" y2="132.5" stroke="#1f56b3" stroke-width="3.0"/><polygon points="96.9,313.9 107.2,307.5 107.2,260.2 96.9,259.9" fill="#c38a54" stroke="#88603a" stroke-width=".4"/><line x1="102.4" y1="260.1" x2="102.4" y2="274.2" stroke="#e9d5a8" stroke-width="3.3" opacity=".85"/><polygon points="96.9,247.5 105.6,249.0 105.6,228.5 96.9,224.6" fill="#cf9e69" stroke="#906e49" stroke-width=".4"/><line x1="101.5" y1="226.7" x2="101.5" y2="232.7" stroke="#e9d5a8" stroke-width="3.3" opacity=".85"/><polygon points="107.2,249.3 112.6,250.2 112.6,231.7 107.2,229.2" fill="#c08852" stroke="#865f39" stroke-width=".4"/><line x1="110.0" y1="230.5" x2="110.0" y2="235.9" stroke="#e9d5a8" stroke-width="2.9" opacity=".85"/><polygon points="96.9,181.0 103.9,187.8 103.9,153.6 96.9,143.6" fill="#c38a54" stroke="#88603a" stroke-width=".4"/><line x1="100.6" y1="148.8" x2="100.6" y2="158.8" stroke="#e9d5a8" stroke-width="3.3" opacity=".85"/><rect x="95.1" y="168.9" width="11.6" height="8.1" fill="#f6f1e4" opacity=".92"/><polygon points="112.0,195.7 117.9,201.4 117.9,179.7 112.0,171.9" fill="#c99a66" stroke="#8c6b47" stroke-width=".4"/><line x1="115.1" y1="176.0" x2="115.1" y2="182.3" stroke="#e9d5a8" stroke-width="2.7" opacity=".85"/><rect x="110.6" y="188.8" width="9.5" height="6.7" fill="#f6f1e4" opacity=".92"/><polygon points="96.9,114.6 107.2,132.8 107.2,105.5 96.9,83.4" fill="#bb844f" stroke="#825c37" stroke-width=".4"/><line x1="102.4" y1="95.2" x2="102.4" y2="103.3" stroke="#e9d5a8" stroke-width="3.3" opacity=".85"/><rect x="97.1" y="112.2" width="11.6" height="8.1" fill="#f6f1e4" opacity=".92"/><polygon points="108.8,135.6 115.2,147.0 115.2,136.0 108.8,123.4" fill="#cb9b67" stroke="#8e6c48" stroke-width=".4"/><line x1="112.2" y1="130.0" x2="112.2" y2="133.2" stroke="#e9d5a8" stroke-width="2.8" opacity=".85"/><rect x="107.5" y="137.0" width="10.0" height="7.0" fill="#f6f1e4" opacity=".92"/><line x1="95.3" y1="329.8" x2="95.3" y2="79.8" stroke="#1f56b3" stroke-width="4.2"/><polygon points="41.9,348.3 71.8,329.6 71.8,270.1 41.9,272.4" fill="#cf985d" stroke="#906a41" stroke-width=".4"/><line x1="58.6" y1="271.1" x2="58.6" y2="289.8" stroke="#e9d5a8" stroke-width="5.5" opacity=".85"/><polygon points="75.2,327.5 93.3,316.2 93.3,259.8 75.2,259.4" fill="#b77e48" stroke="#805832" stroke-width=".4"/><line x1="85.1" y1="259.6" x2="85.1" y2="276.9" stroke="#e9d5a8" stroke-width="4.2" opacity=".85"/><polygon points="41.9,237.8 64.3,241.7 64.3,189.7 41.9,175.7" fill="#c48b53" stroke="#89613a" stroke-width=".4"/><line x1="54.1" y1="183.3" x2="54.1" y2="199.2" stroke="#e9d5a8" stroke-width="5.5" opacity=".85"/><polygon points="68.1,242.4 83.3,245.1 83.3,201.6 68.1,192.1" fill="#cc965b" stroke="#8e693f" stroke-width=".4"/><line x1="76.3" y1="197.2" x2="76.3" y2="210.2" stroke="#e9d5a8" stroke-width="4.5" opacity=".85"/><polygon points="84.0,245.2 93.2,246.8 93.2,207.7 84.0,202.0" fill="#b67d47" stroke="#7f5731" stroke-width=".4"/><line x1="88.8" y1="205.0" x2="88.8" y2="216.5" stroke="#e9d5a8" stroke-width="3.8" opacity=".85"/><rect x="82.6" y="227.8" width="13.4" height="9.4" fill="#f6f1e4" opacity=".92"/><polygon points="41.9,127.3 71.8,156.5 71.8,107.8 41.9,65.2" fill="#cc9158" stroke="#8e653d" stroke-width=".4"/><line x1="58.6" y1="89.1" x2="58.6" y2="104.4" stroke="#e9d5a8" stroke-width="5.5" opacity=".85"/><rect x="50.4" y="120.8" width="19.3" height="13.5" fill="#f6f1e4" opacity=".92"/><polygon points="73.6,158.3 84.8,169.1 84.8,135.8 73.6,121.0" fill="#d4a26b" stroke="#94714a" stroke-width=".4"/><line x1="79.5" y1="128.8" x2="79.5" y2="138.7" stroke="#e9d5a8" stroke-width="4.3" opacity=".85"/><rect x="72.6" y="148.8" width="14.9" height="10.4" fill="#f6f1e4" opacity=".92"/><polygon points="41.9,16.8 68.1,63.5 68.1,21.5 41.9,-35.0" fill="#d8a66e" stroke="#97744d" stroke-width=".4"/><line x1="56.4" y1="-3.8" x2="56.4" y2="9.2" stroke="#e9d5a8" stroke-width="5.5" opacity=".85"/><rect x="48.0" y="24.2" width="19.3" height="13.5" fill="#f6f1e4" opacity=".92"/><polygon points="70.1,66.9 84.8,93.0 84.8,76.7 70.1,48.2" fill="#d5a36c" stroke="#95724b" stroke-width=".4"/><line x1="78.0" y1="63.5" x2="78.0" y2="68.3" stroke="#e9d5a8" stroke-width="4.4" opacity=".85"/><rect x="71.0" y="74.4" width="15.4" height="10.8" fill="#f6f1e4" opacity=".92"/><line x1="37.1" y1="376.3" x2="37.1" y2="-45.1" stroke="#1f56b3" stroke-width="7.1"/><polygon points="-229.8,518.1 -80.4,424.8 -80.4,353.1 -229.8,405.4" fill="#d89f61" stroke="#976f43" stroke-width=".4"/><line x1="-138.5" y1="373.5" x2="-138.5" y2="398.0" stroke="#e9d5a8" stroke-width="16.4" opacity=".85"/><rect x="-160.2" y="418.2" width="57.4" height="40.2" fill="#f6f1e4" opacity=".92"/><polygon points="-75.1,421.4 -8.0,379.5 -8.0,327.8 -75.1,351.3" fill="#c1854b" stroke="#875d34" stroke-width=".4"/><line x1="-36.5" y1="337.8" x2="-36.5" y2="354.4" stroke="#e9d5a8" stroke-width="10.2" opacity=".85"/><rect x="-51.1" y="368.9" width="35.7" height="25.0" fill="#f6f1e4" opacity=".92"/><polygon points="-229.8,190.3 -102.5,212.6 -102.5,28.9 -229.8,-76.1" fill="#cc9156" stroke="#8e653c" stroke-width=".4"/><line x1="-154.4" y1="-13.9" x2="-154.4" y2="46.9" stroke="#e9d5a8" stroke-width="16.4" opacity=".85"/><polygon points="-80.4,216.4 8.8,232.0 8.8,137.9 -80.4,73.2" fill="#ca8f55" stroke="#8d643b" stroke-width=".4"/><line x1="-26.6" y1="112.2" x2="-26.6" y2="144.0" stroke="#e9d5a8" stroke-width="10.4" opacity=".85"/><rect x="-40.7" y="176.5" width="36.5" height="25.5" fill="#f6f1e4" opacity=".92"/><polygon points="-229.8,-137.6 -102.5,-13.4 -102.5,-197.0 -229.8,-404.0" fill="#c4874c" stroke="#895e35" stroke-width=".4"/><line x1="-154.4" y1="-281.5" x2="-154.4" y2="-220.6" stroke="#e9d5a8" stroke-width="16.4" opacity=".85"/><polygon points="-80.4,8.1 -10.8,75.9 -10.8,-48.1 -80.4,-161.2" fill="#d2955b" stroke="#93683f" stroke-width=".4"/><line x1="-40.3" y1="-95.9" x2="-40.3" y2="-55.8" stroke="#e9d5a8" stroke-width="10.4" opacity=".85"/><polygon points="-229.8,-465.5 -102.5,-239.4 -102.5,-318.3 -229.8,-579.9" fill="#d89f61" stroke="#976f43" stroke-width=".4"/><line x1="-154.4" y1="-425.1" x2="-154.4" y2="-398.9" stroke="#e9d5a8" stroke-width="16.4" opacity=".85"/><rect x="-177.1" y="-362.2" width="57.4" height="40.2" fill="#f6f1e4" opacity=".92"/><polygon points="-90.3,-217.7 -28.3,-107.8 -28.3,-185.9 -90.3,-319.1" fill="#ca8f55" stroke="#8d643b" stroke-width=".4"/><line x1="-55.3" y1="-243.9" x2="-55.3" y2="-219.2" stroke="#e9d5a8" stroke-width="10.8" opacity=".85"/><line x1="-274.5" y1="625.6" x2="-274.5" y2="-715.3" stroke="#1f56b3" stroke-width="22.7"/><line x1="160.1" y1="277.9" x2="160.1" y2="219.2" stroke="#1f56b3" stroke-width="1"/><polygon points="-274.5,568.8 160.1,275.4 160.1,273.7 -274.5,527.9" fill="#e8741c"/><polygon points="-274.5,205.2 160.1,259.5 160.1,257.7 -274.5,164.3" fill="#e8741c"/><polygon points="-274.5,-158.5 160.1,243.6 160.1,241.8 -274.5,-199.4" fill="#e8741c"/><polygon points="-274.5,-522.1 160.1,227.6 160.1,225.8 -274.5,-563.0" fill="#e8741c"/><polygon points="634.5,625.6 634.5,-715.3 199.9,219.2 199.9,277.9" fill="#0f1a2e"/><polygon points="201.9,275.7 201.4,275.4 201.4,261.5 201.9,261.5" fill="#8e653d" stroke="#63462a" stroke-width=".4"/><line x1="201.6" y1="261.5" x2="201.6" y2="265.4" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><rect x="200.1" y="269.2" width="3.1" height="2.1" fill="#f6f1e4" opacity=".92"/><polygon points="201.3,275.3 200.8,275.0 200.8,263.6 201.3,263.6" fill="#97744c" stroke="#695135" stroke-width=".4"/><line x1="201.0" y1="263.6" x2="201.0" y2="266.8" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><polygon points="200.7,274.9 200.1,274.6 200.1,267.5 200.7,267.7" fill="#89613a" stroke="#5f4328" stroke-width=".4"/><line x1="200.4" y1="267.6" x2="200.4" y2="269.6" stroke="#e9d5a8" stroke-width="0.8" opacity=".85"/><polygon points="201.9,258.2 201.0,258.3 201.0,252.6 201.9,252.1" fill="#835a33" stroke="#5b3e23" stroke-width=".4"/><line x1="201.4" y1="252.4" x2="201.4" y2="254.0" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><polygon points="200.9,258.3 200.4,258.4 200.4,251.3 200.9,251.0" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="200.7" y1="251.1" x2="200.7" y2="253.2" stroke="#e9d5a8" stroke-width="0.8" opacity=".85"/><polygon points="201.9,240.6 201.1,241.4 201.1,234.0 201.9,233.0" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="201.5" y1="233.5" x2="201.5" y2="235.6" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><polygon points="201.1,241.5 200.3,242.2 200.3,236.6 201.1,235.7" fill="#89613a" stroke="#5f4328" stroke-width=".4"/><line x1="200.7" y1="236.1" x2="200.7" y2="237.7" stroke="#e9d5a8" stroke-width="0.8" opacity=".85"/><polygon points="201.9,223.1 201.0,224.7 201.0,221.2 201.9,219.4" fill="#8e653d" stroke="#63462a" stroke-width=".4"/><line x1="201.4" y1="220.3" x2="201.4" y2="221.3" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><rect x="199.9" y="222.4" width="3.1" height="2.1" fill="#f6f1e4" opacity=".92"/><line x1="202.0" y1="279.6" x2="202.0" y2="214.6" stroke="#1f56b3" stroke-width="1.1"/><polygon points="203.3,276.6 202.3,275.9 202.3,263.7 203.3,263.8" fill="#89613a" stroke="#5f4328" stroke-width=".4"/><line x1="202.8" y1="263.7" x2="202.8" y2="267.2" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><polygon points="204.5,257.7 203.8,257.8 203.8,249.5 204.5,249.1" fill="#8e653d" stroke="#63462a" stroke-width=".4"/><line x1="204.2" y1="249.3" x2="204.2" y2="251.7" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><rect x="202.4" y="254.0" width="3.4" height="2.4" fill="#f6f1e4" opacity=".92"/><polygon points="203.8,257.8 203.0,258.0 203.0,243.0 203.8,242.4" fill="#97744c" stroke="#695135" stroke-width=".4"/><line x1="203.4" y1="242.7" x2="203.4" y2="247.0" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><polygon points="204.5,238.1 203.7,238.9 203.7,225.9 204.5,224.7" fill="#835a33" stroke="#5b3e23" stroke-width=".4"/><line x1="204.1" y1="225.3" x2="204.1" y2="229.0" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><rect x="202.3" y="232.6" width="3.4" height="2.4" fill="#f6f1e4" opacity=".92"/><polygon points="203.6,239.0 202.6,240.0 202.6,227.6 203.6,226.0" fill="#97744c" stroke="#695135" stroke-width=".4"/><line x1="203.1" y1="226.8" x2="203.1" y2="230.4" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><polygon points="204.5,218.5 203.3,220.6 203.3,214.0 204.5,211.7" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="203.9" y1="212.9" x2="203.9" y2="214.8" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><rect x="202.1" y="216.7" width="3.4" height="2.4" fill="#f6f1e4" opacity=".92"/><polygon points="203.3,220.7 202.2,222.6 202.2,217.7 203.3,215.7" fill="#916a41" stroke="#654a2d" stroke-width=".4"/><line x1="202.7" y1="216.7" x2="202.7" y2="218.1" stroke="#e9d5a8" stroke-width="0.9" opacity=".85"/><line x1="204.6" y1="281.7" x2="204.6" y2="209.0" stroke="#1f56b3" stroke-width="1.2"/><polygon points="207.7,279.3 206.5,278.6 206.5,264.0 207.7,264.1" fill="#895f36" stroke="#5f4225" stroke-width=".4"/><line x1="207.1" y1="264.0" x2="207.1" y2="268.2" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><polygon points="206.3,278.4 205.5,278.0 205.5,263.9 206.3,264.0" fill="#9b764e" stroke="#6c5236" stroke-width=".4"/><line x1="205.9" y1="263.9" x2="205.9" y2="267.9" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><polygon points="207.7,257.1 206.9,257.3 206.9,245.2 207.7,244.7" fill="#8f653c" stroke="#64462a" stroke-width=".4"/><line x1="207.3" y1="244.9" x2="207.3" y2="248.4" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><rect x="205.3" y="251.7" width="3.9" height="2.7" fill="#f6f1e4" opacity=".92"/><polygon points="206.8,257.3 205.4,257.5 205.4,248.6 206.8,247.9" fill="#9c774f" stroke="#6d5337" stroke-width=".4"/><line x1="206.1" y1="248.3" x2="206.1" y2="250.9" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><polygon points="207.7,234.9 206.3,236.4 206.3,219.3 207.7,216.9" fill="#956a40" stroke="#684a2c" stroke-width=".4"/><line x1="207.0" y1="218.1" x2="207.0" y2="223.0" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><rect x="205.0" y="227.9" width="3.9" height="2.7" fill="#f6f1e4" opacity=".92"/><polygon points="206.2,236.4 205.5,237.1 205.5,223.1 206.2,222.0" fill="#865c34" stroke="#5d4024" stroke-width=".4"/><line x1="205.9" y1="222.6" x2="205.9" y2="226.5" stroke="#e9d5a8" stroke-width="1.0" opacity=".85"/><polygon points="206.3,215.3 205.4,217.0 205.4,208.3 206.3,206.4" fill="#9b764e" stroke="#6c5236" stroke-width=".4"/><line x1="205.8" y1="207.4" x2="205.8" y2="209.8" stroke="#e9d5a8" stroke-width="1.1" opacity=".85"/><rect x="203.9" y="212.3" width="3.7" height="2.6" fill="#f6f1e4" opacity=".92"/><line x1="207.9" y1="284.3" x2="207.9" y2="201.9" stroke="#1f56b3" stroke-width="1.4"/><polygon points="212.0,282.0 210.1,280.8 210.1,267.3 212.0,267.6" fill="#926439" stroke="#664627" stroke-width=".4"/><line x1="211.0" y1="267.4" x2="211.0" y2="271.3" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><polygon points="209.9,280.7 209.0,280.1 209.0,270.0 209.9,270.2" fill="#9d7346" stroke="#6d5031" stroke-width=".4"/><line x1="209.5" y1="270.1" x2="209.5" y2="273.0" stroke="#e9d5a8" stroke-width="1.2" opacity=".85"/><rect x="207.3" y="275.7" width="4.2" height="2.9" fill="#f6f1e4" opacity=".92"/><polygon points="212.0,256.4 210.1,256.7 210.1,240.2 212.0,238.8" fill="#926439" stroke="#664627" stroke-width=".4"/><line x1="211.0" y1="239.5" x2="211.0" y2="244.3" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><rect x="208.7" y="248.9" width="4.5" height="3.1" fill="#f6f1e4" opacity=".92"/><polygon points="212.0,230.8 210.9,231.9 210.9,217.9 212.0,216.4" fill="#a88155" stroke="#755a3b" stroke-width=".4"/><line x1="211.5" y1="217.2" x2="211.5" y2="221.1" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><polygon points="210.8,231.9 209.8,232.9 209.8,216.5 210.8,215.0" fill="#906338" stroke="#644527" stroke-width=".4"/><line x1="210.3" y1="215.7" x2="210.3" y2="220.4" stroke="#e9d5a8" stroke-width="1.2" opacity=".85"/><rect x="208.1" y="225.0" width="4.3" height="3.0" fill="#f6f1e4" opacity=".92"/><polygon points="209.6,233.2 208.4,234.3 208.4,221.5 209.6,219.9" fill="#9c7346" stroke="#6d5031" stroke-width=".4"/><line x1="209.0" y1="220.7" x2="209.0" y2="224.4" stroke="#e9d5a8" stroke-width="1.2" opacity=".85"/><polygon points="212.0,205.2 210.4,208.1 210.4,196.7 212.0,193.2" fill="#9f7144" stroke="#6f4f2f" stroke-width=".4"/><line x1="211.2" y1="195.0" x2="211.2" y2="198.3" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><polygon points="210.3,208.2 209.3,210.0 209.3,203.6 210.3,201.7" fill="#8f6238" stroke="#644427" stroke-width=".4"/><line x1="209.8" y1="202.7" x2="209.8" y2="204.5" stroke="#e9d5a8" stroke-width="1.2" opacity=".85"/><rect x="207.6" y="206.3" width="4.2" height="3.0" fill="#f6f1e4" opacity=".92"/><line x1="212.3" y1="287.8" x2="212.3" y2="192.6" stroke="#1f56b3" stroke-width="1.6"/><polygon points="217.8,285.6 215.5,284.2 215.5,274.4 217.8,275.2" fill="#a17244" stroke="#704f2f" stroke-width=".4"/><line x1="216.6" y1="274.8" x2="216.6" y2="277.6" stroke="#e9d5a8" stroke-width="1.5" opacity=".85"/><rect x="213.9" y="280.3" width="5.3" height="3.7" fill="#f6f1e4" opacity=".92"/><polygon points="215.2,284.0 212.9,282.5 212.9,264.5 215.2,264.6" fill="#a67a4b" stroke="#745534" stroke-width=".4"/><line x1="214.0" y1="264.5" x2="214.0" y2="269.8" stroke="#e9d5a8" stroke-width="1.4" opacity=".85"/><rect x="211.4" y="274.8" width="4.9" height="3.4" fill="#f6f1e4" opacity=".92"/><polygon points="217.8,255.4 215.2,255.8 215.2,243.5 217.8,242.1" fill="#aa7d4c" stroke="#765735" stroke-width=".4"/><line x1="216.4" y1="242.9" x2="216.4" y2="246.4" stroke="#e9d5a8" stroke-width="1.5" opacity=".85"/><rect x="213.7" y="249.9" width="5.3" height="3.7" fill="#f6f1e4" opacity=".92"/><polygon points="215.1,255.9 213.8,256.1 213.8,237.5 215.1,236.6" fill="#a67a4b" stroke="#745534" stroke-width=".4"/><line x1="214.4" y1="237.1" x2="214.4" y2="242.4" stroke="#e9d5a8" stroke-width="1.4" opacity=".85"/><polygon points="213.7,256.1 212.5,256.3 212.5,245.0 213.7,244.3" fill="#a17345" stroke="#705030" stroke-width=".4"/><line x1="213.1" y1="244.6" x2="213.1" y2="247.9" stroke="#e9d5a8" stroke-width="1.3" opacity=".85"/><polygon points="217.8,225.1 215.5,227.4 215.5,211.4 217.8,208.1" fill="#a87748" stroke="#755332" stroke-width=".4"/><line x1="216.6" y1="209.8" x2="216.6" y2="214.4" stroke="#e9d5a8" stroke-width="1.5" opacity=".85"/><polygon points="217.8,194.9 215.9,198.2 215.9,190.4 217.8,186.7" fill="#a87748" stroke="#755332" stroke-width=".4"/><line x1="216.8" y1="188.6" x2="216.8" y2="190.8" stroke="#e9d5a8" stroke-width="1.5" opacity=".85"/><rect x="214.1" y="193.2" width="5.3" height="3.7" fill="#f6f1e4" opacity=".92"/><polygon points="215.5,198.9 213.5,202.5 213.5,193.2 215.5,189.0" fill="#ae8558" stroke="#795d3d" stroke-width=".4"/><line x1="214.5" y1="191.1" x2="214.5" y2="193.8" stroke="#e9d5a8" stroke-width="1.4" opacity=".85"/><line x1="218.2" y1="292.5" x2="218.2" y2="179.9" stroke="#1f56b3" stroke-width="1.9"/><polygon points="226.2,290.9 223.4,289.1 223.4,277.2 226.2,278.2" fill="#a2703f" stroke="#714e2c" stroke-width=".4"/><line x1="224.8" y1="277.7" x2="224.8" y2="281.1" stroke="#e9d5a8" stroke-width="1.8" opacity=".85"/><polygon points="222.3,254.6 219.9,255.0 219.9,237.0 222.3,235.6" fill="#a67546" stroke="#745131" stroke-width=".4"/><line x1="221.1" y1="236.3" x2="221.1" y2="241.5" stroke="#e9d5a8" stroke-width="1.7" opacity=".85"/><polygon points="226.2,216.9 222.3,220.8 222.3,197.5 226.2,191.5" fill="#aa7847" stroke="#765431" stroke-width=".4"/><line x1="224.2" y1="194.6" x2="224.2" y2="201.4" stroke="#e9d5a8" stroke-width="1.8" opacity=".85"/><rect x="220.7" y="208.2" width="6.5" height="4.5" fill="#f6f1e4" opacity=".92"/><polygon points="222.0,221.0 220.2,222.8 220.2,208.8 222.0,206.3" fill="#b78c5d" stroke="#806241" stroke-width=".4"/><line x1="221.1" y1="207.6" x2="221.1" y2="211.6" stroke="#e9d5a8" stroke-width="1.7" opacity=".85"/><polygon points="226.2,180.0 222.3,186.9 222.3,175.1 226.2,167.1" fill="#b38450" stroke="#7d5c38" stroke-width=".4"/><line x1="224.2" y1="171.3" x2="224.2" y2="174.7" stroke="#e9d5a8" stroke-width="1.8" opacity=".85"/><polygon points="222.0,187.4 219.7,191.6 219.7,178.0 222.0,173.1" fill="#9f6d3e" stroke="#6f4c2b" stroke-width=".4"/><line x1="220.8" y1="175.6" x2="220.8" y2="179.5" stroke="#e9d5a8" stroke-width="1.7" opacity=".85"/><line x1="226.7" y1="299.4" x2="226.7" y2="161.5" stroke="#1f56b3" stroke-width="2.3"/><polygon points="233.1,295.2 230.2,293.3 230.2,275.8 233.1,276.6" fill="#a77341" stroke="#74502d" stroke-width=".4"/><line x1="231.6" y1="276.2" x2="231.6" y2="281.2" stroke="#e9d5a8" stroke-width="2.1" opacity=".85"/><rect x="227.7" y="286.0" width="7.4" height="5.2" fill="#f6f1e4" opacity=".92"/><polygon points="239.4,251.6 233.1,252.7 233.1,228.8 239.4,224.9" fill="#bd8b55" stroke="#84613b" stroke-width=".4"/><line x1="236.1" y1="227.0" x2="236.1" y2="234.0" stroke="#e9d5a8" stroke-width="2.4" opacity=".85"/><polygon points="232.9,252.8 228.5,253.5 228.5,222.0 232.9,218.4" fill="#a77341" stroke="#74502d" stroke-width=".4"/><line x1="230.6" y1="220.3" x2="230.6" y2="229.5" stroke="#e9d5a8" stroke-width="2.1" opacity=".85"/><rect x="226.7" y="238.5" width="7.4" height="5.2" fill="#f6f1e4" opacity=".92"/><polygon points="239.4,204.1 233.1,210.2 233.1,186.4 239.4,177.4" fill="#ab7643" stroke="#77522e" stroke-width=".4"/><line x1="236.1" y1="182.1" x2="236.1" y2="189.2" stroke="#e9d5a8" stroke-width="2.4" opacity=".85"/><rect x="231.6" y="196.4" width="8.3" height="5.8" fill="#f6f1e4" opacity=".92"/><polygon points="232.9,210.5 230.0,213.3 230.0,190.8 232.9,186.7" fill="#a77341" stroke="#74502d" stroke-width=".4"/><line x1="231.4" y1="188.8" x2="231.4" y2="195.3" stroke="#e9d5a8" stroke-width="2.1" opacity=".85"/><polygon points="239.4,156.6 233.1,167.8 233.1,153.0 239.4,140.0" fill="#ab7643" stroke="#77522e" stroke-width=".4"/><line x1="236.1" y1="146.8" x2="236.1" y2="151.2" stroke="#e9d5a8" stroke-width="2.4" opacity=".85"/><rect x="231.6" y="156.1" width="8.3" height="5.8" fill="#f6f1e4" opacity=".92"/><polygon points="232.2,169.3 227.3,178.0 227.3,160.3 232.2,149.7" fill="#a77341" stroke="#74502d" stroke-width=".4"/><line x1="229.7" y1="155.2" x2="229.7" y2="160.5" stroke="#e9d5a8" stroke-width="2.1" opacity=".85"/><rect x="225.7" y="166.0" width="7.3" height="5.1" fill="#f6f1e4" opacity=".92"/><line x1="240.2" y1="310.2" x2="240.2" y2="132.5" stroke="#1f56b3" stroke-width="3.0"/><polygon points="251.2,306.5 242.3,301.0 242.3,266.7 251.2,267.3" fill="#c28e57" stroke="#87633c" stroke-width=".4"/><line x1="246.5" y1="267.0" x2="246.5" y2="277.2" stroke="#e9d5a8" stroke-width="2.8" opacity=".85"/><rect x="241.1" y="286.9" width="10.0" height="7.0" fill="#f6f1e4" opacity=".92"/><polygon points="263.1,247.5 256.1,248.7 256.1,227.8 263.1,224.6" fill="#cf9e69" stroke="#906e49" stroke-width=".4"/><line x1="259.4" y1="226.3" x2="259.4" y2="232.4" stroke="#e9d5a8" stroke-width="3.3" opacity=".85"/><rect x="253.3" y="238.4" width="11.6" height="8.1" fill="#f6f1e4" opacity=".92"/><polygon points="255.6,248.8 247.0,250.3 247.0,220.1 255.6,214.7" fill="#c18953" stroke="#875f3a" stroke-width=".4"/><line x1="251.1" y1="217.6" x2="251.1" y2="226.5" stroke="#e9d5a8" stroke-width="3.0" opacity=".85"/><rect x="245.4" y="235.3" width="10.6" height="7.4" fill="#f6f1e4" opacity=".92"/><polygon points="263.1,181.0 252.8,191.0 252.8,143.7 263.1,127.0" fill="#c69159" stroke="#8a653e" stroke-width=".4"/><line x1="257.6" y1="135.9" x2="257.6" y2="150.1" stroke="#e9d5a8" stroke-width="3.3" opacity=".85"/><rect x="251.3" y="164.3" width="11.6" height="8.1" fill="#f6f1e4" opacity=".92"/><polygon points="252.4,191.5 247.0,196.7 247.0,159.8 252.4,151.7" fill="#b07945" stroke="#7b5430" stroke-width=".4"/><line x1="249.6" y1="155.9" x2="249.6" y2="166.6" stroke="#e9d5a8" stroke-width="2.9" opacity=".85"/><polygon points="263.1,114.6 254.4,129.9 254.4,113.8 263.1,96.5" fill="#c69159" stroke="#8a653e" stroke-width=".4"/><line x1="258.5" y1="105.6" x2="258.5" y2="110.4" stroke="#e9d5a8" stroke-width="3.3" opacity=".85"/><polygon points="252.8,132.8 244.8,147.0 244.8,133.0 252.8,117.0" fill="#c08852" stroke="#865f39" stroke-width=".4"/><line x1="248.5" y1="125.5" x2="248.5" y2="129.6" stroke="#e9d5a8" stroke-width="2.9" opacity=".85"/><rect x="243.0" y="134.4" width="10.2" height="7.1" fill="#f6f1e4" opacity=".92"/><line x1="264.7" y1="329.8" x2="264.7" y2="79.8" stroke="#1f56b3" stroke-width="4.2"/><polygon points="318.1,348.3 291.9,331.9 291.9,259.2 318.1,258.5" fill="#cf985d" stroke="#906a41" stroke-width=".4"/><line x1="303.6" y1="258.9" x2="303.6" y2="281.4" stroke="#e9d5a8" stroke-width="5.5" opacity=".85"/><polygon points="289.9,330.7 275.2,321.5 275.2,295.3 289.9,300.5" fill="#cc955b" stroke="#8e683f" stroke-width=".4"/><line x1="282.0" y1="297.7" x2="282.0" y2="305.6" stroke="#e9d5a8" stroke-width="4.4" opacity=".85"/><polygon points="318.1,237.8 295.7,241.7 295.7,209.9 318.1,199.8" fill="#cf985d" stroke="#906a41" stroke-width=".4"/><line x1="305.9" y1="205.3" x2="305.9" y2="215.0" stroke="#e9d5a8" stroke-width="5.5" opacity=".85"/><rect x="295.2" y="224.7" width="19.3" height="13.5" fill="#f6f1e4" opacity=".92"/><polygon points="318.1,127.3 288.2,156.5 288.2,118.6 318.1,79.0" fill="#bb8149" stroke="#825a33" stroke-width=".4"/><line x1="301.4" y1="101.2" x2="301.4" y2="113.1" stroke="#e9d5a8" stroke-width="5.5" opacity=".85"/><polygon points="284.8,159.8 271.4,172.9 271.4,147.7 284.8,131.0" fill="#d4a26b" stroke="#94714a" stroke-width=".4"/><line x1="277.7" y1="139.9" x2="277.7" y2="147.4" stroke="#e9d5a8" stroke-width="4.2" opacity=".85"/><rect x="269.7" y="155.4" width="14.7" height="10.3" fill="#f6f1e4" opacity=".92"/><polygon points="318.1,16.8 291.9,63.5 291.9,32.2 318.1,-21.7" fill="#c48b53" stroke="#89613a" stroke-width=".4"/><line x1="303.6" y1="8.1" x2="303.6" y2="17.7" stroke="#e9d5a8" stroke-width="5.5" opacity=".85"/><rect x="292.7" y="29.5" width="19.3" height="13.5" fill="#f6f1e4" opacity=".92"/><polygon points="290.9,65.2 276.0,91.7 276.0,64.8 290.9,34.2" fill="#c98e56" stroke="#8c633c" stroke-width=".4"/><line x1="282.9" y1="50.7" x2="282.9" y2="58.7" stroke="#e9d5a8" stroke-width="4.4" opacity=".85"/><rect x="274.4" y="67.9" width="15.5" height="10.9" fill="#f6f1e4" opacity=".92"/><line x1="322.9" y1="376.3" x2="322.9" y2="-45.1" stroke="#1f56b3" stroke-width="7.1"/><polygon points="589.8,518.1 421.5,413.0 421.5,256.0 589.8,251.8" fill="#d5975c" stroke="#956940" stroke-width=".4"/><line x1="484.0" y1="254.4" x2="484.0" y2="309.7" stroke="#e9d5a8" stroke-width="16.4" opacity=".85"/><rect x="447.6" y="360.5" width="57.4" height="40.2" fill="#f6f1e4" opacity=".92"/><polygon points="417.0,410.1 340.8,362.5 340.8,318.3 417.0,344.9" fill="#d59c60" stroke="#956d43" stroke-width=".4"/><line x1="371.6" y1="329.0" x2="371.6" y2="343.8" stroke="#e9d5a8" stroke-width="9.5" opacity=".85"/><polygon points="589.8,190.3 405.2,222.6 405.2,160.6 589.8,77.6" fill="#e2ad72" stroke="#9e794f" stroke-width=".4"/><line x1="470.7" y1="131.2" x2="470.7" y2="153.6" stroke="#e9d5a8" stroke-width="16.4" opacity=".85"/><rect x="433.8" y="177.6" width="57.4" height="40.2" fill="#f6f1e4" opacity=".92"/><polygon points="401.2,223.3 348.9,232.4 348.9,122.6 401.2,79.5" fill="#c98e55" stroke="#8c633b" stroke-width=".4"/><line x1="371.6" y1="104.0" x2="371.6" y2="138.8" stroke="#e9d5a8" stroke-width="8.8" opacity=".85"/><polygon points="589.8,-137.6 405.2,42.4 405.2,-19.5 589.8,-250.3" fill="#d89f61" stroke="#976f43" stroke-width=".4"/><line x1="470.7" y1="-101.4" x2="470.7" y2="-79.0" stroke="#e9d5a8" stroke-width="16.4" opacity=".85"/><polygon points="391.0,56.3 335.3,110.6 335.3,40.7 391.0,-38.6" fill="#dda970" stroke="#9a764e" stroke-width=".4"/><line x1="358.9" y1="7.1" x2="358.9" y2="29.6" stroke="#e9d5a8" stroke-width="8.4" opacity=".85"/><rect x="341.4" y="54.5" width="29.5" height="20.7" fill="#f6f1e4" opacity=".92"/><polygon points="421.5,-166.7 360.5,-58.4 360.5,-108.8 421.5,-234.2" fill="#c1854b" stroke="#875d34" stroke-width=".4"/><line x1="386.6" y1="-162.4" x2="386.6" y2="-146.3" stroke="#e9d5a8" stroke-width="9.7" opacity=".85"/><line x1="634.5" y1="625.6" x2="634.5" y2="-715.3" stroke="#1f56b3" stroke-width="22.7"/><line x1="199.9" y1="277.9" x2="199.9" y2="219.2" stroke="#1f56b3" stroke-width="1"/><polygon points="634.5,568.8 199.9,275.4 199.9,273.7 634.5,527.9" fill="#e8741c"/><polygon points="634.5,205.2 199.9,259.5 199.9,257.7 634.5,164.3" fill="#e8741c"/><polygon points="634.5,-158.5 199.9,243.6 199.9,241.8 634.5,-199.4" fill="#e8741c"/><polygon points="634.5,-522.1 199.9,227.6 199.9,225.8 634.5,-563.0" fill="#e8741c"/><polygon points="136.9,306.4 167.5,306.4 167.5,275.9 136.9,275.9" fill="#bd8b55" stroke="#84613b" stroke-width=".5"/><polygon points="136.9,275.9 167.5,275.9 168.9,274.4 141.6,274.4" fill="#d99f61"/><polygon points="167.5,306.4 168.9,301.6 168.9,274.4 167.5,275.9" fill="#976f44"/><line x1="152.2" y1="275.9" x2="152.2" y2="285.1" stroke="#e9d5a8" stroke-width="2.5"/><polygon points="139.7,306.4 153.6,306.4 153.6,292.6 139.7,292.6" fill="#c59764" stroke="#896946" stroke-width=".5"/><polygon points="139.7,292.6 153.6,292.6 155.3,290.6 142.2,290.6" fill="#e2ad72"/><polygon points="153.6,306.4 155.3,303.7 155.3,290.6 153.6,292.6" fill="#9d7850"/><line x1="146.7" y1="292.6" x2="146.7" y2="296.7" stroke="#e9d5a8" stroke-width="2.5"/><polygon points="189.4,295.3 214.4,295.3 214.4,270.3 189.4,270.3" fill="#a97747" stroke="#765331" stroke-width=".5"/><polygon points="189.4,270.3 214.4,270.3 211.5,269.6 188.6,269.6" fill="#c28851"/><polygon points="189.4,295.3 188.6,292.5 188.6,269.6 189.4,270.3" fill="#875f38"/><line x1="201.9" y1="270.3" x2="201.9" y2="277.8" stroke="#e9d5a8" stroke-width="1.9"/><polygon points="154.2,287.8 173.5,287.8 173.5,271.7 154.2,271.7" fill="#a47446" stroke="#725131" stroke-width=".5"/><polygon points="154.2,271.7 173.5,271.7 174.0,271.0 155.9,271.0" fill="#bc8550"/><polygon points="173.5,287.8 174.0,286.1 174.0,271.0 173.5,271.7" fill="#835c38"/><line x1="163.9" y1="271.7" x2="163.9" y2="276.5" stroke="#e9d5a8" stroke-width="1.5"/><polygon points="200.2,326.5 240.5,326.5 240.5,288.2 200.2,288.2" fill="#c69259" stroke="#8a663e" stroke-width=".5"/><polygon points="200.2,288.2 240.5,288.2 232.1,284.6 197.4,284.6" fill="#e3a766"/><polygon points="200.2,326.5 197.4,317.6 197.4,284.6 200.2,288.2" fill="#9e7447"/><line x1="220.3" y1="288.2" x2="220.3" y2="299.7" stroke="#e9d5a8" stroke-width="3.6"/><polygon points="202.2,326.5 220.3,326.5 220.3,308.4 202.2,308.4" fill="#b47c46" stroke="#7d5631" stroke-width=".5"/><polygon points="202.2,308.4 220.3,308.4 217.3,304.9 200.5,304.9" fill="#ce8e50"/><polygon points="202.2,326.5 200.5,321.7 200.5,304.9 202.2,308.4" fill="#906338"/><line x1="211.2" y1="308.4" x2="211.2" y2="313.8" stroke="#e9d5a8" stroke-width="3.6"/><polygon points="126.4,319.1 165.7,319.1 165.7,272.7 126.4,272.7" fill="#9cc7ff" opacity=".55" stroke="#cfe5ff" stroke-width=".5"/><polygon points="128.4,317.2 164.0,317.2 164.0,276.2 128.4,276.2" fill="#c8935a" opacity=".8"/><rect width="360" height="640" fill="#0a1426" opacity=".0"/></svg></div>
 
   <button id="muteBtn" aria-label="Aktif/matikan suara">
     <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
@@ -292,45 +406,46 @@ body::before{content:'';position:fixed;inset:-6%;
 
   <!-- LAYAR 1: SAMBUTAN -->
   <section id="welcome" class="screen on">
+    <h1>Mengapa Orang Mengikuti Kita?</h1>
+    <p class="sub">Kenapa ya anggota tim mau ikut sama leadernya?</p>
     <div class="hero">
-      <div class="badge-n">!!!</div>
-      <div class="mc c1"><span class="a" style="background:#8fb8ff"></span><span class="n"></span><i></i><i></i><i class="s"></i></div>
-      <div class="mc c3"><span class="a" style="background:#7fe0bd"></span><span class="n"></span><i></i><i></i><i class="s"></i></div>
-      <div class="mc c2"><span class="a" style="background:#ffd27a"></span><span class="n"></span><i></i><i></i><i class="s"></i></div>
+      <div class="say rt sw">Halo, Leader!<br>Salam kenal, saya <b>Pak Ale</b> 👋</div>
+      <div class="hp" id="hPres" data-presenter data-pose="greet"></div>
+      <div class="pile"><div class="bx b1"></div><div class="bx b2"></div><div class="bx b3"></div><div class="badge-n">!!!</div></div>
       <div class="tabs">
         <b style="--c:#5b8def"></b><b style="--c:#2fc59a"></b><b style="--c:#f2bd42"></b><b style="--c:#f0884a"></b><b style="--c:#a67cf0"></b>
       </div>
     </div>
-    <h1>Mengapa Orang Mengikuti Kita?</h1>
-    <p class="sub">Kenapa ya anggota tim mau mengikuti leadernya?</p>
-    <p class="t">Halo Bapak/Ibu Leader! <br>Melalui gamifikasi ini, Bapak/Ibu akan diuji kembali tingkat pemahamannya terkait 5 Level Kepemimpinan<br>dari John C. Maxwell.</p>
-    <div class="mission"><strong>Petunjuk Gamifikasi:</strong> Cocokkan setiap pesan yang berada di bagian kiri ke kelompok Level Kepemimpinan di bagian kanan secara tepat.</div>
+    <div class="say up task">Ada paket skenario kepemimpinan yang numpuk nih! <br>Tugas Bapak/Ibu adalah untuk <b>sortir</b> tiap paket ke kelompok <b>5 Level Kepemimpinan</b> yang paling pas.</div>
     <div class="field">
       <label for="playerName">Nama Bapak/Ibu</label>
       <input type="text" id="playerName" placeholder="Ketik nama Bapak/Ibu di sini..." autocomplete="off" maxlength="40">
     </div>
-    <button id="btnStart" class="btn" disabled>Mulai Gamifikasi</button>
-    <div class="copy">© Education and Training Departement 2026</div>
+    <button id="btnStart" class="btn" disabled>Mulai Gamifikasi!</button>
+    <div class="copy">© Education and Training Department 2026</div>
   </section>
 
   <!-- LAYAR 1B: CONTOH PENGERJAAN -->
   <section id="tutorial" class="screen">
     <h2>Contoh <span>Pengerjaan</span></h2>
-    <p class="tut-sub">Halo, <b id="tName"></b>! Ada 10 pesan yang harus dicocokkan. Perhatikan contoh singkat ini dulu sebelum mulai.</p>
+    <div class="tut-head">
+      <div class="tp" id="tPres" data-presenter data-pose="point"></div>
+      <div class="say lf">Oke, <b id="tName"></b>! Ada 10 paket yang harus disortir. <br>Nih contoh singkatnya dulu ya.</div>
+    </div>
 
-    <div class="demo" aria-label="Animasi contoh cara menarik kartu pesan ke level yang tepat">
+    <div class="demo" aria-label="Animasi contoh cara menarik kardus ke kelompok yang tepat">
       <div class="demo-tag">CONTOH</div>
-      <div class="dhead l">Pesan Masuk</div>
+      <div class="dhead l">Paket Skenario</div>
       <div class="dhead r">5 Level Kepemimpinan</div>
 
       <div class="dcol">
         <div class="dghost b"></div><div class="dghost a"></div>
-        <div class="dcard">
-          <div class="hd"><div class="av">📦</div><div class="who"><b>Staf Gudang</b><small>07:45 AM</small></div></div>
-          <p>"Saya ikut arahan Bapak/Ibu karena beliau atasan saya dan memang sudah aturannya begitu."</p>
-        </div>
+        <div class="dcard"><div class="dtape"></div><div class="lbl">
+          <div class="hd"><div class="av">📦</div><div class="who"><b>Bunga</b><small>Paket contoh</small></div></div>
+          <p>"Saya ikut arahan Pak Joko karena beliau atasan saya dan memang sudah aturannya begitu."</p>
+        </div></div>
       </div>
-      <div class="dtoast">✓ Tepat! Tim mengikuti karena jabatan leader.</div>
+      <div class="dtoast">✓ Tepat! Tim ikut karena jabatan leader.</div>
 
       <div class="dlevels">
         <div class="dl t1" style="--c:#5b8def;--cs:rgba(91,141,239,.14);--cb:rgba(91,141,239,.42)"><div class="dlh"><b class="dlb">1</b><div><strong>Position</strong><small>Jabatan</small></div></div><div class="dls"><span class="ds"><span class="dfill">📦 Staf Gudang</span></span><span class="ds"></span></div></div>
@@ -343,24 +458,24 @@ body::before{content:'';position:fixed;inset:-6%;
     </div>
 
     <div class="steps">
-      <div class="st"><i>1</i><div><b>Baca pesannya.</b> Pikirkan alasan utama kenapa anggota tim tersebut mengikuti leadernya.</div></div>
-      <div class="st"><i>2</i><div><b>Tarik atau sentuh kartunya.</b> Tarik kartu ke level yang tepat, atau sentuh kartu lalu sentuh levelnya.</div></div>
+      <div class="st"><i>1</i><div><b>Baca isi paketnya.</b> Pikirin alasan utama kenapa anggota tim itu mau ikut sama leadernya.</div></div>
+      <div class="st"><i>2</i><div><b>Tarik atau ketuk paketnya.</b> Tarik ke kelompok yang pas, atau ketuk paket terus ketuk kelompoknya.</div></div>
     </div>
     <div class="legend">
-      <div class="chip ok"><b>✓ Tepat</b>Kartu masuk ke level dan skor bertambah.</div>
-      <div class="chip no"><b>✗ Belum tepat</b>Kartu kembali, silakan coba lagi.</div>
+      <div class="chip ok"><b>✓ Tepat</b>Paket berhasil disortir ke kelompok yang benar.</div>
+      <div class="chip no"><b>✗ Belum tepat</b>Paketnya salah tujuan, coba sortir lagi dengan benar.</div>
     </div>
 
-    <button id="btnGo" class="btn">Saya Mengerti, Mulai!</button>
-    <div class="copy">© Education and Training Departement 2026</div>
+    <button id="btnGo" class="btn">Siap, Mulai Sortir!</button>
+    <div class="copy">© Education and Training Department 2026</div>
   </section>
 
   <!-- LAYAR 2: GAMEPLAY -->
   <section id="game" class="screen">
     <div class="topbar">
       <div class="brand">
-        <div class="logo">✉️</div>
-        <div><b>Kotak Masuk</b><small id="who"></small></div>
+        <div class="logo">📦</div>
+        <div><b>Distribution Center</b><small id="who"></small></div>
       </div>
       <div class="pill"><span id="score">0</span>/10</div>
     </div>
@@ -368,39 +483,46 @@ body::before{content:'';position:fixed;inset:-6%;
 
     <div class="board">
       <div class="col left">
-        <div class="col-head"><span>Pesan Masuk</span><b id="leftCount">10</b></div>
+        <div class="col-head"><span>Paket Skenario</span><b id="leftCount">10</b></div>
+        <div class="coach">
+          <div class="say dn" id="gSay">Paket pertama nih! Baca isinya, terus sortir ke kelompok yang pas ya.</div>
+          <div class="gp" id="gPres" data-presenter data-pose="point"></div>
+          <span class="nm">Pak Ale</span>
+        </div>
         <div class="deck"><div class="deck-in" id="deckIn">
           <div class="ghost g2" id="g2"></div><div class="ghost g1" id="g1"></div>
-        </div></div>
-        <div class="hint"><span>➜</span>Cocokkan pesannya</div>
+        </div><div class="belt"></div></div>
       </div>
       <div class="col right">
         <div class="col-head"><span>5 Level Kepemimpinan</span></div>
         <div class="levels" id="levels"></div>
       </div>
     </div>
-    <div class="tip">Bisa ditarik atau bisa juga disentuh kartunya</div>
-    <div class="copy">© Education and Training Departement 2026</div>
+    <div class="copy">© Education and Training Department 2026</div>
   </section>
 
   <!-- LAYAR 3: DEBRIEF -->
   <section id="debrief" class="screen">
-    <div class="trophy">🏆</div>
-    <h2>Gamifikasi selesai, <br>Leader <span id="dName"></span>!</h2>
-    <p class="lead">Seluruh pesan sudah dapat dicocokkan dengan tepat.</p>
+    <div class="dhero">
+      <div class="dpw"><div class="dp" id="dPres" data-presenter data-pose="cheer"></div><div class="dtro">🏆</div></div>
+      <div class="tx">
+        <h2>Sortir selesai, <br>Leader <span id="dName"></span>!</h2>
+        <p class="lead">Semua paket udah masuk kelompok yang pas. Mantap, kata Pak Ale!</p>
+      </div>
+    </div>
     <div class="stats">
       <div class="stat"><b id="dAcc">100%</b><small>Akurasi</small></div>
-      <div class="stat"><b id="dErr">0</b><small>Salah taruh</small></div>
+      <div class="stat"><b id="dErr">0</b><small>Salah kelompok</small></div>
     </div>
     <div class="box">
-      <h3>Kesimpulan Gamifikasi</h3>
+      <h3>Kata Pak Ale</h3>
       <p style="margin:0 0 .6em">5 Level Kepemimpinan ini ga ada kaitannya sama level jabatan atau jobclass leadernya lho.</p>
       <p style="margin:0;color:#9ccbff"> Untuk jadi leader hebat, ga perlu muluk-muluk  mengejar sampai level Pinnacle dulu. Kita bisa bikin tim ikut kita karena mereka melihat hasil kerja atau kita bisa ngembangin mereka pun, itu udah bagus banget.</p>
     </div>
     <div class="box" id="recap"><h3>Rangkuman 5 Level Kepemimpinan dari John C. Maxwell</h3></div>
 
-    <button id="btnAgain" class="btn alt">Ulang Gamifikasi</button>
-    <div class="copy">© Education and Training Departement 2026</div>
+    <button id="btnAgain" class="btn alt">Ulangi Gamifikasi</button>
+    <div class="copy">© Education and Training Department 2026</div>
   </section>
 
   <div id="toast"></div>
@@ -409,34 +531,34 @@ body::before{content:'';position:fixed;inset:-6%;
 <script>
 /* ================= DATA ================= */
 const LEVELS=[
- {n:1,name:'Position',sub:'Jabatan',desc:'Tim mengikuti karena jabatan leader lebih tinggi.',c:'91,141,239',hex:'#5b8def',recap:'Tim mengikuti leader karena posisi leader yang lebih tinggi secara struktural.'},
- {n:2,name:'Permission',sub:'Hubungan Kerja',desc:'Tim mengikuti karena merasa nyaman & terhubung.',c:'47,197,154',hex:'#2fc59a',recap:'Tim mengiktui leader karena hubungan personal dan empati yang sudah terbangun.'},
- {n:3,name:'Production',sub:'Hasil Kerja',desc:'Tim mengikuti karena rekam jejak positif bersama.',c:'242,189,66',hex:'#f2bd42',recap:'Tim mengikuti leader karena kredibilitas leader dalam bekerja.'},
- {n:4,name:'People Development',sub:'Mengembangkan Tim',desc:'Tim mengikuti karena berdampak pada mereka.',c:'240,136,74',hex:'#f0884a',recap:'Tim mengikuti leader karena leader telah berhasil mengembangkan diri mereka.'},
- {n:5,name:'Pinnacle',sub: 'Rasa Hormat', desc:'Tim mengikuti leader karena rasa hormat.',c:'166,124,240',hex:'#a67cf0',recap:'Tim mengikuti Leader karena nilai-nilai yang ditunjukkan oleh leader .'}
+ {n:1,name:'Position',sub:'Jabatan',desc:'Tim ikut leader karena jabatan leader lebih tinggi.',c:'91,141,239',hex:'#5b8def',recap:'Tim ikut karena posisi leader lebih tinggi secara struktural.'},
+ {n:2,name:'Permission',sub:'Hubungan Kerja',desc:'Tim ikut leader karena merasa nyaman & terhubung.',c:'47,197,154',hex:'#2fc59a',recap:'Tim ikut karena udah ada hubungan personal dan empati yang terbangun.'},
+ {n:3,name:'Production',sub:'Hasil Kerja',desc:'Tim ikut leader karena rekam jejak positif bersama.',c:'242,189,66',hex:'#f2bd42',recap:'Tim ikut karena percaya sama kredibilitas leader dalam bekerja.'},
+ {n:4,name:'People Development',sub:'Mengembangkan Tim',desc:'Tim ikut leader karena berdampak pada mereka.',c:'240,136,74',hex:'#f0884a',recap:'Tim ikut karena leader udah berhasil mengembangkan diri mereka.'},
+ {n:5,name:'Pinnacle',sub: 'Rasa Hormat', desc:'Tim ikut leader karena rasa hormat.',c:'166,124,240',hex:'#a67cf0',recap:'Tim ikut karena nilai-nilai yang ditunjukkan leader.'}
 ];
 
 const SCEN=[
- {id:'pos-1', level:1, icon:'👤', sender:'Anggota Tim Baru', time:'08:10 AM', why:'Patuh pada instruksi leader karena masih baru.',
-  text:'"Kenapa ya? Mungkin karena saya juga anak baru. Apalagi belum lama gabung di sini... Masak anak baru nolak instruksi dari atasan."'},
- {id:'pos-2', level:1, icon:'📋', sender:'Staf Shift Malam', time:'08:25 AM', why:'Patuh karena keharusan SOP dan wewenang leader.',
-  text:'"Jujur aja, saya kerjain tugas ini ya karena Bapak/Ibu kan atasan saya. Kalau dibilang nyaman banget sih belum, namanya juga bawahan."'}, 
- {id:'perm-1', level:2, icon:'☕', sender:'Staf Administrasi', time:'08:35 AM', why:'Nyaman karena leader tidak menjaga jarak dan perhatian.',
-  text:'"Saya udah lama menjadi tim Bapak/Ibu. Selama ini, saya ngerasa Bapak/Ibu itu gak berjarak sama timnya, perhatian juga dengan timnya."'},
- {id:'perm-2', level:2, icon:'🤝', sender:'Kasir Toko', time:'08:50 AM', why:'Merasa aman dan terhubung secara emosional dengan leader.',
-  text:'"Waktu saya sempet telat, Bapak/Ibu nanya \'apa kamu ada masalah pribadi?\'. Gak banyak atasan yang nanya gitu. Dari situ saya merasa benar-benar terhubung dan diperhatikan."'},
- {id:'prod-1', level:3, icon:'💡', sender:'Asisten Kepala Toko', time:'09:05 AM', why:'Kagum karena keputusan leader selalu membuahkan hasil.',
-  text:'"Saya kagum sekaligus hormat banget sama Bapak/Ibu. Kalo ditanya kenapa, ya jelas lah karena banyak keputusan-keputusan yang diambil tuh solutif banget."'},
- {id:'prod-2', level:3, icon:'📈', sender:'Tim Sales', time:'09:20 AM', why:'Bersemangat karena leader konsisten membawa tim mencapai target.',
-  text:'"Setiap akhir bulan pasti tembus target kalau dipimpin Bapak/Ibu. Seneng aja gitu ikut atasan yang strateginya jalan dan bawa timnya capai target terus."'},
- {id:'peop-1', level:4, icon:'🎓', sender:'Pramuniaga Senior', time:'09:40 AM', why:'Merasa bertumbuh dan mendapatkan skill baru berkat bimbingan leader.',
-  text:'"Saya pribadi belajar banyak dari Bapak/Ibu. Dari yang awalnya bingung pas baru masuk, sampe sekarang bisa jago ngerjain laporan dan display barang."'},
- {id:'peop-2', level:4, icon:'🎯', sender:'Calon Supervisor', time:'09:55 AM', why:'Berani mengambil tanggung jawab lebih berkat coaching dari leader.',
-  text:'"Kalau bukan karena sering di-coaching sama Bapak/Ibu, saya pasti gak berani ikut tes promosi. Makasih udah telaten banget ngembangin potensi saya."'},
- {id:'pin-1', level:5, icon:'🌟', sender:'Area Manager', time:'10:10 AM', why:' Hormat karisma dan rekam jejak konsisten di berbagai cabang.',
-  text:'"Bapak/Ibu itu sosok yang karismatik ya, teruji ngadepin banyak masalah. Setiap pindah cabang, pasti cabangnya ikut jadi bagus. Ga banyak leader kayak gitu menurut saya."'},
- {id:'pin-2', level:5, icon:'📱', sender:'Mantan Anggota Tim', time:'10:30 AM', why:'Integritas leader membekas dan tetap menjadi panutan meski sudah berpisah.',
-  text:'"Walaupun Bapak/Ibu sudah pindah cabang, anak-anak di sini masih sering jadiin Bapak/Ibu panutan. Integritas dan cara kerjanya bener-bener nempel di ingatan kita semua."'}
+ {id:'pos-1', level:1, icon:'👤', sender:'Anto', why:'Dia ikut karena Pak Dimas atasannya, apalagi masih baru.',
+  text:'"Kenapa ya? Mungkin karena saya juga anak baru. Apalagi belum lama gabung di sini... Masak anak baru nolak instruksi dari atasan kayak Pak Dimas."'},
+ {id:'pos-2', level:1, icon:'📋', sender:'Agam', why:'Ikut karena Bu Rina atasannya, bukan karena nyaman.',
+  text:'"Jujur aja, saya kerjain tugas ini ya karena Bu Rina kan atasan saya. Kalau dibilang nyaman banget sih belum, namanya juga bawahan."'},
+ {id:'perm-1', level:2, icon:'☕', sender:'Desi', why:'Nyaman karena Pak Budi gak jaga jarak dan perhatian.',
+  text:'"Saya udah lama menjadi tim Pak Budi. Selama ini, saya ngerasa Pak Budi itu gak berjarak sama timnya, perhatian juga dengan timnya."'},
+ {id:'perm-2', level:2, icon:'🤝', sender:'Rita', why:'Merasa terhubung dan diperhatiin sama Bu Sari.',
+  text:'"Waktu saya sempet telat, Bu Sari nanya \'Apa kamu ada masalah pribadi?\'. Gak banyak atasan yang nanya gitu. Dari situ saya merasa benar-benar terhubung dan diperhatikan."'},
+ {id:'prod-1', level:3, icon:'💡', sender:'Helmi', why:'Kagum karena keputusan Pak Hendra selalu solutif.',
+  text:'"Saya kagum sekaligus hormat banget sama Pak Hendra. Kalo ditanya kenapa, ya jelas lah karena banyak keputusan-keputusan yang diambil tuh solutif banget."'},
+ {id:'prod-2', level:3, icon:'📈', sender:'Hendi', why:'Semangat karena Bu Wulan konsisten bawa tim capai target.',
+  text:'"Setiap akhir bulan pasti tembus target kalau dipimpin Bu Wulan. Seneng aja gitu ikut atasan yang strateginya jalan dan bawa timnya capai target terus."'},
+ {id:'peop-1', level:4, icon:'🎓', sender:'Frans', why:'Bertumbuh dan dapat skill baru berkat bimbingan Pak Agus.',
+  text:'"Saya pribadi belajar banyak dari Pak Agus. Dari yang awalnya bingung pas baru masuk, sampe sekarang bisa jago ngerjain laporan dan presentasi."'},
+ {id:'peop-2', level:4, icon:'🎯', sender:'Hendra', why:'Berani maju berkat coaching dari Bu Maya.',
+  text:'"Kalau bukan karena sering di-coaching sama Bu Maya, saya pasti gak berani ikut tes promosi. Makasih udah telaten banget ngembangin potensi saya."'},
+ {id:'pin-1', level:5, icon:'🌟', sender:'Kris', why:'Hormat sama karisma dan rekam jejak Pak Bagas di banyak cabang.',
+  text:'"Pak Bagas itu sosok yang karismatik ya, teruji ngadepin banyak masalah. Setiap pindah cabang, pasti cabangnya ikut jadi bagus. Ga banyak leader kayak gitu menurut saya."'},
+ {id:'pin-2', level:5, icon:'📱', sender:'Denny', why:'Integritas Bu Citra masih membekas dan jadi panutan.',
+  text:'"Walaupun Bu Citra sudah pindah cabang, anak-anak di sini masih sering jadiin beliau panutan. Integritas dan cara kerjanya bener-bener nempel di ingatan kita semua."'}
 ];
 const TOTAL=SCEN.length;
 
@@ -614,6 +736,8 @@ const Sound=(()=>{
     toggle(){muted=!muted;setMaster();return muted;},
     isMuted:()=>muted,
     grab(){tone(520,0,.06,'sine',.06)},
+    scan(){tone(1750,0,.05,'square',.03);tone(2350,.07,.07,'square',.03)},
+    thud(){tone(150,0,.18,'triangle',.18,55)},
     ok(){tone(660,0,.14,'sine',.13);tone(990,.09,.28,'sine',.13)},
     no(){tone(230,0,.22,'triangle',.14,150)},
     level(){[784,988,1175].forEach((f,i)=>tone(f,i*.07,.35,'sine',.1))},
@@ -635,6 +759,135 @@ nameIn.addEventListener('input',()=>{btnStart.disabled=nameIn.value.trim().lengt
 nameIn.addEventListener('keydown',e=>{if(e.key==='Enter'&&!btnStart.disabled){nameIn.blur();btnStart.click();}});
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));}
+
+/* ================= LATAR DC UNTUK AREA LUAR ================= */
+(function(){try{const sv=document.querySelector('.bg > svg');if(sv){const x=new XMLSerializer().serializeToString(sv);
+  document.documentElement.style.setProperty('--dcbg','url("data:image/svg+xml;charset=utf-8,'+encodeURIComponent(x)+'")');}}catch(e){}})();
+
+/* ================= PRESENTER (TOKOH KARTUN) ================= */
+const PRES_SVG=`<svg viewBox="0 0 200 250" aria-hidden="true" focusable="false"><g class="pz">
+<!-- ===== LENGAN BELAKANG (pose sorak / ups digambar sebelum badan) ===== -->
+<g class="pa pa-cheer">
+  <path d="M60 156 C44 150 32 132 30 108" stroke="#cc9166" stroke-width="17" stroke-linecap="round" fill="none"/>
+  <path d="M140 156 C156 150 168 132 170 108" stroke="#cc9166" stroke-width="17" stroke-linecap="round" fill="none"/>
+</g>
+<!-- ===== BADAN ===== -->
+<path d="M44 250 L50 168 C52 146 72 136 100 136 C128 136 148 146 150 168 L156 250 Z" fill="#f6f8fb"/>
+<path d="M44 250 L50 168 C52 150 60 142 70 139 L72 250 Z" fill="#e3e9f0"/>
+<path d="M44 238 L156 238 L156 250 L44 250 Z" fill="#262a31"/>
+<path d="M46 238 L154 238" stroke="#d3dbe5" stroke-width="1.4"/>
+<!-- leher -->
+<path d="M85 108 L85 140 C92 150 108 150 115 140 L115 108 Z" fill="#b9794f"/>
+<!-- kerah polo -->
+<path d="M70 144 L88 133 L100 160 L84 168 Z" fill="#1f5fae"/>
+<path d="M130 144 L112 133 L100 160 L116 168 Z" fill="#1f5fae"/>
+<path d="M70 144 L84 168" stroke="#d9403a" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M130 144 L116 168" stroke="#d9403a" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M92 140 C96 146 104 146 108 140" stroke="#9c6440" stroke-width="2" fill="none"/>
+<!-- kancing & plaket -->
+<path d="M100 160 L100 196" stroke="#cfd8e3" stroke-width="1.6"/>
+<circle cx="100" cy="176" r="2" fill="#cfd8e3"/><circle cx="100" cy="190" r="2" fill="#cfd8e3"/>
+<!-- tanda pengenal (tanpa logo) -->
+<rect x="119" y="182" width="17" height="24" rx="2.5" fill="#ffffff" stroke="#c4cfdc" stroke-width="1"/>
+<rect x="119" y="182" width="17" height="6" rx="2.5" fill="#1f5fae"/>
+<text x="127.5" y="199" font-size="6.6" font-weight="800" text-anchor="middle" fill="#1f5fae" font-family="Plus Jakarta Sans,Arial,sans-serif">ALE</text><rect x="122" y="202" width="11" height="1.6" rx=".8" fill="#c4cfdc"/>
+<!-- ===== KEPALA ===== -->
+<ellipse cx="57" cy="84" rx="7" ry="11" fill="#c28659"/><ellipse cx="143" cy="84" rx="7" ry="11" fill="#c28659"/>
+<ellipse cx="57" cy="85" rx="3" ry="6" fill="#a8673f" opacity=".55"/><ellipse cx="143" cy="85" rx="3" ry="6" fill="#a8673f" opacity=".55"/>
+<path d="M58 70 C58 40 78 28 100 28 C122 28 142 40 142 70 L142 90 C142 114 124 128 100 128 C76 128 58 114 58 90 Z" fill="#cf9568"/>
+<path d="M58 90 C60 112 76 126 100 126 C86 120 70 112 64 98 Z" fill="#b9794f" opacity=".35"/>
+<!-- rambut -->
+<path d="M55 80 C46 42 68 14 102 14 C136 14 156 42 145 80 C143 64 138 54 130 48 C120 54 100 54 86 50 C74 54 66 64 63 80 Z" fill="#17120f"/>
+<path d="M80 34 C80 10 118 0 136 18 C146 28 144 40 142 46 C134 36 124 32 114 34 C104 24 90 26 80 34 Z" fill="#17120f"/>
+<path d="M90 22 C102 12 120 12 130 22" stroke="#4a3d36" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/>
+<path d="M60 78 L62 91 L66 81 Z" fill="#17120f"/><path d="M140 78 L138 91 L134 81 Z" fill="#17120f"/>
+<!-- alis -->
+<g class="brow-n"><path d="M72 69 Q84 61 95 68" stroke="#17120f" stroke-width="5.4" stroke-linecap="round" fill="none"/>
+<path d="M105 68 Q116 61 128 69" stroke="#17120f" stroke-width="5.4" stroke-linecap="round" fill="none"/></g>
+<g class="brow-w"><path d="M72 72 Q84 68 95 62" stroke="#17120f" stroke-width="5.4" stroke-linecap="round" fill="none"/>
+<path d="M105 62 Q116 68 128 72" stroke="#17120f" stroke-width="5.4" stroke-linecap="round" fill="none"/></g>
+<g class="brow-u"><path d="M72 64 Q84 56 95 62" stroke="#17120f" stroke-width="5.4" stroke-linecap="round" fill="none"/>
+<path d="M105 62 Q116 56 128 64" stroke="#17120f" stroke-width="5.4" stroke-linecap="round" fill="none"/></g>
+<!-- mata -->
+<g class="eyes">
+  <ellipse cx="84" cy="83" rx="5.6" ry="6.6" fill="#2a1710"/><circle cx="86" cy="80.6" r="2" fill="#fff"/>
+  <ellipse cx="116" cy="83" rx="5.6" ry="6.6" fill="#2a1710"/><circle cx="118" cy="80.6" r="2" fill="#fff"/>
+</g>
+<!-- hidung, kumis tipis, pipi -->
+<path d="M100 88 C98 97 95 101 98 104 C100 106 104 106 105 103" stroke="#a5663f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+<path d="M86 108 Q93 104 100 106 Q107 104 114 108" stroke="#2c211b" stroke-width="2" fill="none" stroke-linecap="round" opacity=".5"/>
+<circle cx="73" cy="99" r="7" fill="#e0795a" opacity=".22"/><circle cx="127" cy="99" r="7" fill="#e0795a" opacity=".22"/>
+<!-- mulut -->
+<g class="m-smile"><path d="M87 112 Q100 123 113 112" stroke="#7a382b" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+<g class="m-grin"><path d="M84 110 Q100 132 116 110 Q100 114 84 110 Z" fill="#6b2a22"/><path d="M87 111 Q100 116 113 111 L112 114.5 Q100 120 88 114.5 Z" fill="#fff"/><path d="M92 121 Q100 126 108 121 Q100 118 92 121 Z" fill="#d9605a"/></g>
+<g class="m-oops"><path d="M88 119 Q94 112 100 117 Q106 122 112 115" stroke="#7a382b" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+<!-- keringat (ups) -->
+<path class="sweat" d="M138 50 C133 60 131 65 135 70 C140 70 142 63 138 50 Z" fill="#8fd6ff" stroke="#5db7ee" stroke-width="1"/>
+
+<!-- ===== LENGAN DEPAN ===== -->
+<!-- sapa (namaste) -->
+<g class="pa pa-greet">
+  <path d="M54 150 C40 154 34 172 38 196 L62 200 C64 180 66 162 72 152 Z" fill="#f6f8fb" stroke="#d6dee8" stroke-width="1.4"/>
+  <path d="M146 150 C160 154 166 172 162 196 L138 200 C136 180 134 162 128 152 Z" fill="#f6f8fb" stroke="#d6dee8" stroke-width="1.4"/>
+  <path d="M50 196 L52 218 L76 192 L92 176" stroke="#cc9166" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M150 196 L148 218 L124 192 L108 176" stroke="#cc9166" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <rect x="116" y="186" width="15" height="11" rx="3.5" fill="#15171b" transform="rotate(-42 123 191)"/><rect x="119" y="188" width="8" height="5" rx="1.5" fill="#46566e" transform="rotate(-42 123 191)"/>
+  <path d="M91 178 C88 162 92 146 100 143 C108 146 112 162 109 178 C107 188 93 188 91 178 Z" fill="#d79c6f"/>
+  <path d="M100 148 L100 184" stroke="#a5663f" stroke-width="1.6"/>
+  <path d="M94 160 L94 170 M106 160 L106 170" stroke="#b8774d" stroke-width="1.1" opacity=".7"/>
+</g>
+<!-- tunjuk (ke kanan-atas) -->
+<g class="pa pa-point">
+  <path d="M146 152 C160 152 170 158 176 170 L158 184 C154 172 148 166 138 162 Z" fill="#f6f8fb" stroke="#d6dee8" stroke-width="1.4"/>
+  <path d="M164 176 L180 150" stroke="#cc9166" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <rect x="164" y="156" width="14" height="10" rx="3.5" fill="#15171b" transform="rotate(-58 171 161)"/><rect x="167" y="158" width="7" height="5" rx="1.5" fill="#46566e" transform="rotate(-58 171 161)"/>
+  <circle cx="184" cy="140" r="11" fill="#d79c6f"/>
+  <path d="M188 133 L196 110" stroke="#d79c6f" stroke-width="7" stroke-linecap="round"/>
+  <path d="M176 146 C172 148 170 144 173 141" stroke="#b8774d" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M54 152 C42 158 36 174 38 196 L62 200 C62 180 66 164 72 154 Z" fill="#f6f8fb" stroke="#d6dee8" stroke-width="1.4"/>
+  <path d="M48 196 L46 226" stroke="#cc9166" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <circle cx="46" cy="232" r="10" fill="#d79c6f"/>
+</g>
+<!-- sorak -->
+<g class="pa pa-cheer-f">
+  <path d="M58 156 C48 152 42 146 40 136 L56 130 C60 140 66 148 74 153 Z" fill="#f6f8fb" stroke="#d6dee8" stroke-width="1.4"/>
+  <path d="M142 156 C152 152 158 146 160 136 L144 130 C140 140 134 148 126 153 Z" fill="#f6f8fb" stroke="#d6dee8" stroke-width="1.4"/>
+  <path d="M44 132 L32 92" stroke="#cc9166" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M156 132 L168 92" stroke="#cc9166" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <circle cx="30" cy="80" r="11.5" fill="#d79c6f"/><circle cx="170" cy="80" r="11.5" fill="#d79c6f"/>
+  <path d="M24 76 L36 76 M24 82 L36 82" stroke="#b8774d" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M164 76 L176 76 M164 82 L176 82" stroke="#b8774d" stroke-width="1.6" stroke-linecap="round"/>
+  <rect x="150" y="104" width="14" height="10" rx="3.5" fill="#15171b" transform="rotate(14 157 109)"/><rect x="153" y="106" width="7" height="5" rx="1.5" fill="#46566e" transform="rotate(14 157 109)"/>
+  <path d="M10 56 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z" fill="#ffd54a"/><path d="M188 52 l2.6 6 6 2.6 -6 2.6 -2.6 6 -2.6 -6 -6 -2.6 6 -2.6z" fill="#ffd54a"/>
+</g>
+<!-- ups (bahu mengangkat, telapak terbuka) -->
+<g class="pa pa-oops">
+  <path d="M54 152 C40 158 34 176 38 198 L62 202 C64 182 66 164 72 154 Z" fill="#f6f8fb" stroke="#d6dee8" stroke-width="1.4"/>
+  <path d="M146 152 C160 158 166 176 162 198 L138 202 C136 182 134 164 128 154 Z" fill="#f6f8fb" stroke="#d6dee8" stroke-width="1.4"/>
+  <path d="M48 196 L36 214 L26 184" stroke="#cc9166" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M152 196 L164 214 L174 184" stroke="#cc9166" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <ellipse cx="24" cy="168" rx="11" ry="13" fill="#d79c6f"/><ellipse cx="176" cy="168" rx="11" ry="13" fill="#d79c6f"/>
+  <path d="M17 160 L18 168 M24 156 L24 166 M31 160 L30 168" stroke="#b8774d" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M169 160 L170 168 M176 156 L176 166 M183 160 L182 168" stroke="#b8774d" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="160" y="198" width="14" height="10" rx="3.5" fill="#15171b" transform="rotate(-20 167 203)"/>
+</g>
+</g>
+</svg>`;
+document.querySelectorAll('[data-presenter]').forEach(el=>{el.classList.add('pres');el.innerHTML=PRES_SVG;});
+function setPose(el,p){if(!el)return;el.dataset.pose=p;el.classList.remove('hop');void el.offsetWidth;el.classList.add('hop');}
+const gPres=document.getElementById('gPres'),gSay=document.getElementById('gSay');
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const MSG={
+  first:'Paket pertama nih! Baca isinya, terus sortir ke kelompok yang pas ya.',
+  next:['Paket berikutnya udah nyampe! Cek isinya.','Baca dulu, baru sortir ya.','Yuk, sortir paket yang ini!','Satu paket lagi, gas!','Pelan-pelan aja, cek alasan utamanya.'],
+  good:['Mantap! Paket terkirim!','Pas banget!','Keren, lanjut sortir!','Sip, kelompoknya bener!','Gokil, tepat sasaran!'],
+  bad:['Ups, salah kelompok nih. Coba lagi!','Hampir! Cek lagi alasannya.','Belum pas, coba kelompok lain ya.'],
+  retry:['Santai, coba lagi aja!','Baca lagi isinya, pasti bisa!'],
+  done:'Semua paket udah terkirim! Gokil!'
+};
+let sayTok=0;
+function say(txt,p){sayTok++;gSay.textContent=txt;gSay.classList.remove('pop');void gSay.offsetWidth;gSay.classList.add('pop');if(p)setPose(gPres,p);}
+function sayLater(txt,p,ms){const t=sayTok;setTimeout(()=>{if(t===sayTok)say(txt,p);},ms);}
 
 /* ================= BUILD ================= */
 function buildLevels(){
@@ -660,6 +913,7 @@ function startGame(){
   queue=[...SCEN].sort(()=>Math.random()-.5);
   buildLevels();
   show('game');
+  say(MSG.first,'point');
   setTimeout(nextCard,450);
 }
 
@@ -671,10 +925,14 @@ function nextCard(){
   card=document.createElement('div');
   card.className='card arrive';
   card.style.transform='translate(0px,0px) scale(1) rotate(0deg)';
-  card.innerHTML=`<div class="hd"><div class="av">${cur.icon}</div>
-      <div class="who"><b>${cur.sender}</b><small>${cur.time}</small></div></div>
-    <p>${cur.text.replace(/\*(.+?)\*/g,'<em>$1</em>')}</p><div class="grip"></div>`;
+  card.innerHTML=`<div class="tape"></div><div class="lbl"><div class="hd"><div class="av">${cur.icon}</div>
+      <div class="who"><b>${cur.sender}</b><small>Paket #${String(SCEN.indexOf(cur)+1).padStart(2,'0')}</small></div></div>
+    <p>${cur.text.replace(/\*(.+?)\*/g,'<em>$1</em>')}</p></div>
+    <div class="cfoot"><i><svg viewBox="0 0 10 10"><path d="M5 1 9 6H6.2V9H3.8V6H1Z" fill="#4a2c0f"/></svg></i><div class="grip"></div><i><svg viewBox="0 0 10 10"><path d="M2 1h6L5.8 5v3H7.5v1h-5V8h1.7V5Z" fill="#4a2c0f"/></svg></i></div>`;
   deckIn.appendChild(card);
+  Sound.scan();
+  if(state.placed===0){say(MSG.first,'point');}
+  else sayLater(pick(MSG.next),'point',1100);
   setTimeout(()=>card&&card.classList.remove('arrive'),600);
   bindCard(card);
   $('leftCount').textContent=remaining;
@@ -777,7 +1035,8 @@ function wrong(lvEl){
   Sound.no();if(navigator.vibrate)navigator.vibrate(70);
   lvEl.classList.remove('shake');void lvEl.offsetWidth;lvEl.classList.add('shake');
   setTimeout(()=>lvEl.classList.remove('shake'),450);
-  toast('Belum Tepat','Cari alasan utama kenapa tim mengikuti.',false);
+  toast('Belum Tepat','Coba cek lagi alasan utama kenapa tim ikut sama leadernya.',false);
+  say(pick(MSG.bad),'oops');sayLater(pick(MSG.retry),'point',2200);
   springBack();
 }
 
@@ -790,7 +1049,7 @@ function correct(lvEl){
   const tx=(dropState&&dropState.moved?dropState.endTX:0),ty=(dropState&&dropState.moved?dropState.endTY:0);
   const dx=(sr.left+sr.width/2)-(cr.left+cr.width/2),dy=(sr.top+sr.height/2)-(cr.top+cr.height/2);
   dropState=null;
-  Sound.ok();if(navigator.vibrate)navigator.vibrate(25);
+  Sound.ok();Sound.thud();if(navigator.vibrate)navigator.vibrate(25);
   el.classList.remove('sel');arm(false);
   el.style.transition='transform .34s cubic-bezier(.5,0,.8,.45),opacity .34s';
   el.style.transform=`translate(${tx+dx}px,${ty+dy}px) scale(.22) rotate(0deg)`;
@@ -798,9 +1057,10 @@ function correct(lvEl){
   setTimeout(()=>{
     el.remove();
     slot.classList.add('full');
-    slot.innerHTML=`<span>${s.icon}</span><span class="t">${s.sender}</span>`;
+    slot.innerHTML=`<span>📦</span><span class="t">${s.sender}</span>`;
     burst(slot,9,L.hex);
     toast('Tepat!',s.why,true);
+    say(state.placed+1===TOTAL?MSG.done:pick(MSG.good),'cheer');
     if(lvEl.querySelectorAll('.slot.full').length===2){
       lvEl.classList.add('done');
       lvEl.querySelector('.badge').textContent='✓';
@@ -845,6 +1105,7 @@ function showDebrief(){
   rc.innerHTML='<h3>Rangkuman 5 Level (John C. Maxwell)</h3>'+LEVELS.map(L=>
     `<div class="rc" style="--c:${L.hex}"><div class="b">${L.n}</div><div><b>${L.name} (${L.sub})</b><br>${L.recap}</div></div>`).join('');
   
+  setPose($('dPres'),'cheer');
   toastEl.classList.remove('show');show('debrief');$('debrief').scrollTop=0;
   Sound.win();confetti();
   sendLMS(); // Eksekusi postMessage dipanggil otomatis di sini
@@ -854,7 +1115,7 @@ $('btnAgain').addEventListener('click',startGame);
 btnStart.addEventListener('click',()=>{
   Sound.start();
   $('tName').textContent=nameIn.value.trim();
-  show('tutorial');$('tutorial').scrollTop=0;
+  show('tutorial');$('tutorial').scrollTop=0;setPose($('tPres'),'point');
 });
 $('btnGo').addEventListener('click',startGame);
 </script>
