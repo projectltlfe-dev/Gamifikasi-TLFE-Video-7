@@ -200,10 +200,6 @@ input{font-family:inherit;-webkit-user-select:text;user-select:text}
 .deb .top .av{width:52px;height:52px;background-size:190px auto;background-position:-70px -27px;border:3px solid #E4EEFC}
 .deb .chipM{display:inline-block;background:var(--ok);color:#fff;font:700 10px var(--fd);padding:2px 9px;border-radius:999px;letter-spacing:.5px}
 .deb h2{font:700 19px/1.15 var(--fd);color:var(--bD);margin-top:3px}
-.score{display:flex;align-items:center;gap:8px;background:#FFF8E6;border-radius:12px;padding:5px 10px;margin:7px 0 5px}
-.score b{font:700 17px var(--fd);color:#B07A00;white-space:nowrap}
-.score .tr{flex:1;height:10px;background:#F0E3C3;border-radius:6px;overflow:hidden}
-.score .tr i{display:block;height:100%;width:0;background:linear-gradient(90deg,#FFC93C,#F28C28);border-radius:6px;transition:width 1.3s var(--smooth) .4s}
 .deb .lead{font:800 11px/1.3 var(--fn);color:#4b4033;margin-bottom:5px}
 .deb .lead b{color:var(--b)}
 .gr{display:grid;gap:4px;text-align:left}
@@ -216,23 +212,18 @@ input{font-family:inherit;-webkit-user-select:text;user-select:text}
 .quote{margin-top:6px;background:var(--bD);color:#fff;border-radius:12px;padding:8px 11px;font:800 11px/1.4 var(--fn);text-align:left}
 .quote b{color:var(--sun)}
 .deb .bt{margin-top:7px;height:42px}
-.d2 h3{font:700 16px/1.2 var(--fd);color:var(--bD);margin:6px 0 2px}
-.d2 .sub{font:800 11px/1.35 var(--fn);color:#4b4033;margin-bottom:7px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:6px;text-align:left}
-.two>div{border-radius:12px;padding:7px 8px;display:flex;flex-direction:column;gap:3px}
-.two .t1{background:#E8F0FD;border:2px solid #A9C4F0}.two .t2{background:#E3F6EA;border:2px solid #9ED7B1}
-.two i{font-style:normal;font-size:20px;line-height:1}
-.two small{font:800 9.5px/1.25 var(--fn);color:var(--mut)}
-.two b{font:700 12px/1.2 var(--fd);color:var(--ink)}
-.two span{font:800 10px/1.3 var(--fn);color:#4b4033}
-.flow{display:flex;align-items:stretch;gap:3px;margin:6px 0 2px}
-.flow div{flex:1;background:var(--b);color:#fff;border-radius:9px;padding:5px 3px;font:700 10px/1.15 var(--fd);display:flex;align-items:center;justify-content:center;text-align:center}
-.flow em{font-style:normal;color:var(--b);font:700 12px var(--fd);align-self:center}
-.lbl2{font:800 9.5px var(--fn);color:var(--mut);letter-spacing:.8px;margin-top:8px;text-align:left}
-.own{margin-top:7px;background:#FFF8E6;border-radius:12px;padding:7px 10px;font:800 10.5px/1.4 var(--fn);color:#4b4033;text-align:left}
-.own b{color:#B0571F}
-.note{margin-top:6px;font:800 10px/1.35 var(--fn);color:var(--mut);text-align:left}
-.note b{color:var(--b)}
+.deb .hd2{display:flex;align-items:flex-end;gap:10px;text-align:left}
+.dRaka{height:112px;width:auto;flex:none;transform-origin:50% 100%;animation:sway 1.4s ease-in-out infinite;filter:drop-shadow(0 4px 0 rgba(0,0,0,.14))}
+.deb .bub2{flex:1;background:#F2F6FC;border:2px solid #D5E3F8;border-radius:14px;padding:7px 10px;position:relative;margin-bottom:14px}
+.deb .bub2:before{content:"";position:absolute;left:-8px;bottom:12px;width:12px;height:12px;background:#F2F6FC;border-left:2px solid #D5E3F8;border-bottom:2px solid #D5E3F8;transform:rotate(45deg)}
+.deb .bub2 .tx2{font:800 11px/1.35 var(--fn);color:#4b4033;margin-top:3px}
+.deb .bub2 .tx2 b{color:var(--b)}
+.deb .gr{margin-top:8px}
+.deb .gr h4{justify-content:flex-start}
+.deb .own{margin-top:8px;background:#FFF8E6;border-radius:12px;padding:8px 11px;font:800 10.5px/1.45 var(--fn);color:#4b4033;text-align:left}
+.deb .own b{color:#B0571F}
+.deb .note{margin-top:6px;font:800 10px/1.35 var(--fn);color:var(--mut);text-align:left}
+.deb .note b{color:var(--b)}
 
 /* ---------- efek ---------- */
 #fx{z-index:60;pointer-events:none}
@@ -297,33 +288,33 @@ const fmt=t=>esc(t.replace(/\{p\}/g,P())).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
 
 /* =================== DATA: 5 level & 5 konsumen (1 per level) =================== */
 const LV=[
- {n:1,k:'Position',sub:'Jabatan',d:'Karena jabatan',c:'#3B7BE0',rc:'Tim ikut leader karena jabatan leader lebih tinggi.'},
- {n:2,k:'Permission',sub:'Hubungan Kerja',d:'Karena <br> hubungan kerja',c:'#1FA37A',rc:'Tim ikut karena hubungan kerja yang baik bikin mereka percaya.'},
- {n:3,k:'Production',sub:'Hasil Kerja',d:'Karena hasil kerja',c:'#E0A21B',rc:'Tim ikut karena hasil kerja leader terlihat dan diakui.'},
+ {n:1,k:'Position',sub:'Jabatan',d:'Karena jabatan',c:'#3B7BE0',rc:'Tim ikut karena jabatan leader lebih tinggi.'},
+ {n:2,k:'Permission',sub:'Hubungan Kerja',d:'Karena <br> hubungan kerja',c:'#1FA37A',rc:'Tim ikut karena hubungan kerja yang baik.'},
+ {n:3,k:'Production',sub:'Hasil Kerja',d:'Karena hasil kerja baik',c:'#E0A21B',rc:'Tim ikut karena hasil kerja leader terlihat dan diakui.'},
  {n:4,k:'People Development',sub:'Mengembangkan Tim',d:'Karena dikembangkan',c:'#E8743B',rc:'Tim ikut karena merasa berkembang bersama leader.'},
- {n:5,k:'Pinnacle',sub:'Rasa Hormat',d:'Karena rasa hormat',c:'#8A5CD6',rc:'Tim ikut karena hormat pada rekam jejak leader yang teruji.'}
+ {n:5,k:'Pinnacle',sub:'Rasa Hormat',d:'Karena prestasi yang teruji',c:'#8A5CD6',rc:'Tim ikut karena hormat pada pengalaman dan prestasi leader yang teruji.'}
 ];
 const ORD=[
- {lv:1,boss:'Pak Dimas',f:'Anto',q:'Saya kan anak baru. Masak nolak instruksi atasan kayak Pak Dimas?',
+ {lv:1,boss:'Bapak Dimas',f:'Anto',q:'Saya kan anak baru. Masak nolak instruksi dari atasan?',
   look:{skin:'#E0AC82',hair:'short',hc:'#1E1A18',shirt:'#2F6FD0'},
-  ex:'Anto ikut karena **jabatan** Pak Dimas sebagai atasannya. Ini titik berangkat yang wajar, tapi **jabatan saja nggak cukup**.',
-  hint:'Petunjuk: Anto masih baru, dan Pak Dimas itu atasannya.'},
- {lv:2,boss:'Bu Sari',f:'Rita',q:'Pas saya telat, Bu Sari malah nanya, "Ada masalah?" Saya jadi percaya sama beliau.',
+  ex:'Anto ikut karena **jabatan** Bapak Dimas sebagai atasannya. Ini hal yang wajar, tapi ingat **jabatan saja nggak cukup**.',
+  hint:'Petunjuk: Anto masih baru, dan Bapak Dimas itu atasannya.'},
+ {lv:2,boss:'Ibu Sari',f:'Rita',q:'Pas performa saya turun, Ibu Sari nggak langsung marahin saya, tapi tanya, "Ada masalah apa?" Saya merasa diperhatikan.',
   look:{skin:'#C99067',hair:'long',hc:'#2E1F18',shirt:'#F3A6B8'},
-  ex:'Rita ikut karena **hubungan kerja** yang baik. Bu Sari peduli, jadi tumbuh **rasa percaya**.',
-  hint:'Petunjuk: Bu Sari bikin Rita merasa diperhatikan, jadi muncul rasa percaya.'},
- {lv:3,boss:'Bu Wulan',f:'Hendi',q:'Dipimpin Bu Wulan, tiap bulan pasti tembus target. Strateginya jalan!',
+  ex:'Rita ikut karena **hubungan kerja** yang baik. Ibu Sari menunjukkan rasa perhatian kepada anggota timnya.',
+  hint:'Petunjuk: Ibu Sari bikin Rita merasa diperhatikan, jadi muncul rasa percaya.'},
+ {lv:3,boss:'Ibu Wulan',f:'Hendi',q:'Kalau dipimpin Ibu Wulan, tiap bulan pasti tembus target, soalnya strateginya efektif!',
   look:{skin:'#E5B48D',hair:'bob',hc:'#4A2E1E',shirt:'#F2BD42',glasses:1},
-  ex:'Hendi ikut karena **hasil kerja** Bu Wulan kelihatan dan **diakui** oleh tim.',
+  ex:'Hendi ikut karena **hasil kerja** Ibu Wulan kelihatan dan **diakui** oleh tim.',
   hint:'Petunjuk: Yang Hendi lihat adalah hasilnya. Target tembus terus!'},
- {lv:4,boss:'Pak Agus',f:'Frans',q:'Dulu saya bingung. Sekarang jago bikin laporan, berkat bimbingan Pak Agus.',
+ {lv:4,boss:'Bapak Agus',f:'Frans',q:'Dulu saya masih bingung-bingung. Sekarang udah dipercaya buat bikin laporan, berkat bimbingan Bapak Agus.',
   look:{skin:'#B97E55',hair:'side',hc:'#151210',shirt:'#3AA76D'},
-  ex:'Frans ikut karena merasa **berkembang** selama dibimbing Pak Agus.',
-  hint:'Petunjuk: Frans jadi jago karena dibimbing Pak Agus.'},
- {lv:5,boss:'Pak Bagas',f:'Kris',q:'Tiap Pak Bagas pindah cabang, cabangnya ikut jadi bagus. Saya hormat banget.',
+  ex:'Frans ikut karena merasa **berkembang** selama dibimbing Bapak Agus.',
+  hint:'Petunjuk: Frans jadi jago karena dibimbing Bapak Agus.'},
+ {lv:5,boss:'Bapak Bagas',f:'Kris',q:'Tiap Bapak Bagas pindah cabang, cabangnya ikut jadi bagus. Saya jadi hormat sama beliau karena prestasinya.',
   look:{skin:'#D39D73',hair:'grey',hc:'#B9BEC6',shirt:'#5B4BA8',stache:1},
-  ex:'Kris ikut karena **rasa hormat** pada pengalaman dan rekam jejak Pak Bagas yang **sudah teruji**.',
-  hint:'Petunjuk: Kris hormat karena rekam jejak Pak Bagas di banyak cabang.'}
+  ex:'Kris ikut karena **rasa hormat** pada pengalaman dan rekam jejak Bapak Bagas yang **sudah teruji**.',
+  hint:'Petunjuk: Kris hormat karena rekam jejak Bapak Bagas di banyak cabang.'}
 ];
 
 /* =================== UKURAN: tinggi inti maks 600px, latar menyambung =================== */
@@ -728,38 +719,19 @@ function sendComplete(){try{
     window.top.postMessage("scoreBarFound", "*");
   }catch(e){}}
 function debrief(){
-  const tot=S.stars.reduce((a,b)=>a+b,0)+S.bonus;setHud(false);hideBub();
+  setHud(false);hideBub();
   const bd=h('div','backdrop','',ui);bd.animate([{opacity:0},{opacity:1}],{duration:300});
   const show=(html,cls)=>{const c=h('div','card deb '+(cls||''),html,ui);
     c.animate([{opacity:0,transform:'translateY(60px) scale(.95)'},{opacity:1,transform:'none'}],{duration:600,easing:'cubic-bezier(.34,1.56,.64,1)'});
     [...c.children].forEach((e,i)=>e.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'}],{duration:420,delay:220+i*80,fill:'backwards'}));return c};
-  const byLv=LV.map(L=>ORD.find(o=>o.lv===L.n));
-  const c1=show(`<div class="top"><span class="av"></span><div><span class="chipM">✓ SEMUA PAKET TERKIRIM</span><h2>Hebat, ${esc(P())}!</h2><div style="font:800 11px var(--fn);color:var(--mut)">5 atasan sudah menerima paketnya 📦</div></div></div>
-    <div class="score"><b>⭐ ${tot} / 20</b><div class="tr"><i></i></div></div>
-    <div class="lead">Alasan tim mau ikut leader-nya bisa beda-beda. Ini <b>5 Level Kepemimpinan</b> dari John C. Maxwell:</div>
-    <div class="gr">${LV.map((L,i)=>{const o=byLv[i],k=ORD.indexOf(o);return`<div style="--c:${L.c}"><span class="L">${L.n}</span><div style="flex:1"><h4>${L.k} · ${L.sub}<small>${'⭐'.repeat(S.stars[k])}${'☆'.repeat(3-S.stars[k])}</small></h4><p>${esc(L.rc)}<br><em>Di jalan:</em> ${esc(o.f)} → ${esc(o.boss)}</p></div></div>`}).join('')}</div>
-    <div class="quote">Level kepemimpinan <b>nggak ada kaitannya sama jabatan</b>. Yang jadi ukuran: <b>Alasan kenapa tim mau ikut kita</b>.</div>
-    <button class="bt wide" id="nx2">Lanjut ▶</button>`);
-  setTimeout(()=>{$('.score .tr i',c1).style.width=(tot/20*100)+'%'},50);
+  const c=show(`<div class="hd2"><img class="dRaka" alt="Raka" src="${IMG}"><div class="bub2"><span class="chipM">💡 RANGKUMAN</span><div class="tx2">Hebat, <b>${esc(P())}</b>! Alasan tim mau ikut leader-nya bisa beda-beda. Ini <b>5 Level Kepemimpinan</b> dari John C. Maxwell:</div></div></div>
+    <div class="gr">${LV.map(L=>`<div style="--c:${L.c}"><span class="L">${L.n}</span><div style="flex:1"><h4>${L.k} · ${L.sub}</h4><p>${esc(L.rc)}</p></div></div>`).join('')}</div>
+    <div class="own">Apapun level jabatan kita dan sudah berapa lama kita jadi leader, itu ga bisa jadi ukuran yang menunjukan level kepemimpinan kita lho. Yang jadi ukuran itu adalah alasan kenapa tim mau ikut sama kita.</div>
+    <div class="note">Rasa hormat butuh <b>waktu dan konsistensi</b>. Sampai ketemu di video berikutnya: <b>CARE</b>! 👋</div>
+    <button class="bt wide" id="again">↺ Ulangi Gamifikasi</button>`);
   setTimeout(()=>{SFX.win();burst(40)},500);
   sendComplete();
-  hintLater(()=>hintTap($('#nx2')),4500);
-  $('#nx2').onclick=async()=>{hintOff();SFX.tap();
-    await c1.animate([{opacity:1},{opacity:0,transform:'translateX(-40px)'}],{duration:260,fill:'forwards'}).finished.catch(()=>{});c1.remove();
-    show(`<span class="chipM" style="background:var(--b)">💡 SATU HAL PENTING</span>
-      <h3>5 level ini lensa, bukan anak tangga</h3>
-      <div class="sub">Memimpin pakai jabatan itu wajar, karena setiap leader memang dikasih jabatan & kewenangan.</div>
-      <div class="two">
-        <div class="t1"><i>🪪</i><small>Titik berangkat</small><b>Jabatan (Position)</b><span>Sah dan wajar. Tapi jangan berhenti di situ.</span></div>
-        <div class="t2"><i>🤝</i><small>Yang bikin tim mau ikut</small><b>Alasan selain jabatan</b><span>Hubungan kerja, hasil kerja, dan tim yang berkembang.</span></div>
-      </div>
-      <div class="lbl2">COBA REFLEKSI KESEHARIAN KITA</div>
-      <div class="flow"><div>Dengerin tim</div><em>›</em><div>Bantu kasih solusi</div><em>›</em><div>Kembangkan tim</div><em>›</em><div>Konsisten</div></div>
-      <div class="own">Jangan sampai alasan tim ikut kita <b>cuma karena kita atasannya</b>. Untuk jadi leader hebat, ga perlu muluk-muluk ngejar Pinnacle dulu. Tim ikut karena lihat <b>hasil kerja</b> atau karena kita <b>kembangkan</b>, itu udah bagus banget.</div>
-      <div class="note">Rasa hormat nggak bisa diminta dan nggak instan. Butuh <b>waktu dan konsistensi</b>. Sampai ketemu di video berikutnya: <b>CARE</b>! 👋</div>
-      <button class="bt wide" id="again">↺ Ulangi Gamifikasi</button>`,'d2');
-    $('#again').onclick=()=>{SFX.tap();location.reload()};
-  };
+  $('#again').onclick=()=>{SFX.tap();location.reload()};
 }
 
 /* =================== ALUR UTAMA =================== */
@@ -770,7 +742,7 @@ async function main(){
   S.order=shuffle(ORD.map((_,i)=>i));
   $('#raka').animate([{transform:'translateX(-130%)'},{transform:'translateX(6%)',offset:.75},{transform:'none'}],{duration:800,easing:'cubic-bezier(.22,1,.36,1)'});
   await sleep(700);
-  await say('Halo, {p}! Salam kenal, saya **Raka**. Hari ini saya mau mengantar paket, yuk bantu saya!','jump',true);
+  await say('Halo, {p}! Salam kenal, saya **Raka**. Yuk, bantu saya kirim paket-paket ini!','jump',true);
   manifest();
   await say('Hari ini ada **5 paket** buat **5 atasan**. Isinya: Alasan kenapa timnya mau ikut sama atasan itu.','nod');
   await say('Tugas {p}: Antar pakai motor, dengar kata timnya, lalu **serahkan paket yang pas**. 🛵','jump');
