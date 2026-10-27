@@ -288,32 +288,32 @@ const fmt=t=>esc(t.replace(/\{p\}/g,P())).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
 
 /* =================== DATA: 5 level & 5 konsumen (1 per level) =================== */
 const LV=[
- {n:1,k:'Position',sub:'Jabatan',d:'Karena jabatan',c:'#3B7BE0',rc:'Tim ikut karena jabatan leader lebih tinggi.'},
- {n:2,k:'Permission',sub:'Hubungan Kerja',d:'Karena <br> hubungan kerja',c:'#1FA37A',rc:'Tim ikut karena hubungan kerja yang baik.'},
- {n:3,k:'Production',sub:'Hasil Kerja',d:'Karena hasil kerja baik',c:'#E0A21B',rc:'Tim ikut karena hasil kerja leader terlihat dan diakui.'},
- {n:4,k:'People Development',sub:'Mengembangkan Tim',d:'Karena dikembangkan',c:'#E8743B',rc:'Tim ikut karena merasa berkembang bersama leader.'},
- {n:5,k:'Pinnacle',sub:'Rasa Hormat',d:'Karena prestasi yang teruji',c:'#8A5CD6',rc:'Tim ikut karena hormat pada pengalaman dan prestasi leader yang teruji.'}
+ {n:1,k:'Position',sub:'Jabatan',d:'Karena jabatan',c:'#3B7BE0',rc:'Tim nurut karena jabatan leader lebih tinggi.'},
+ {n:2,k:'Permission',sub:'Hubungan Kerja',d:'Karena <br> hubungan kerja',c:'#1FA37A',rc:'Tim nurut karena hubungan kerja yang baik dengan leader.'},
+ {n:3,k:'Production',sub:'Hasil Kerja',d:'Karena hasil kerja baik',c:'#E0A21B',rc:'Tim nurut karena hasil kerja leader terlihat dan diakui.'},
+ {n:4,k:'People Development',sub:'Mengembangkan Tim',d:'Karena dikembangkan',c:'#E8743B',rc:'Tim nurut karena merasa berkembang bersama leader.'},
+ {n:5,k:'Pinnacle',sub:'Rasa Hormat',d:'Karena prestasi yang teruji',c:'#8A5CD6',rc:'Tim nurut karena hormat pada pengalaman dan prestasi leader yang teruji.'}
 ];
 const ORD=[
  {lv:1,boss:'Bapak Dimas',f:'Anto',q:'Saya kan anak baru. Masak nolak instruksi dari atasan?',
   look:{skin:'#E0AC82',hair:'short',hc:'#1E1A18',shirt:'#2F6FD0'},
-  ex:'Anto ikut karena **jabatan** Bapak Dimas sebagai atasannya. Ini hal yang wajar, tapi ingat **jabatan saja nggak cukup**.',
+  ex:'Anto nurut karena **jabatan** Bapak Dimas sebagai atasannya. Ini hal yang wajar, tapi ingat ya **jabatan saja nggak cukup**.',
   hint:'Petunjuk: Anto masih baru, dan Bapak Dimas itu atasannya.'},
  {lv:2,boss:'Ibu Sari',f:'Rita',q:'Pas performa saya turun, Ibu Sari nggak langsung marahin saya, tapi tanya, "Ada masalah apa?" Saya merasa diperhatikan.',
   look:{skin:'#C99067',hair:'long',hc:'#2E1F18',shirt:'#F3A6B8'},
-  ex:'Rita ikut karena **hubungan kerja** yang baik. Ibu Sari menunjukkan rasa perhatian kepada anggota timnya.',
-  hint:'Petunjuk: Ibu Sari bikin Rita merasa diperhatikan, jadi muncul rasa percaya.'},
+  ex:'Rita nurut karena Ibu Sari menunjukkan rasa perhatian kepada anggota timnya, sehingga tercipta **hubungan kerja** yang baik.',
+  hint:'Petunjuk: Ibu Sari bikin Rita merasa diperhatikan.'},
  {lv:3,boss:'Ibu Wulan',f:'Hendi',q:'Kalau dipimpin Ibu Wulan, tiap bulan pasti tembus target, soalnya strateginya efektif!',
   look:{skin:'#E5B48D',hair:'bob',hc:'#4A2E1E',shirt:'#F2BD42',glasses:1},
-  ex:'Hendi ikut karena **hasil kerja** Ibu Wulan kelihatan dan **diakui** oleh tim.',
+  ex:'Hendi nurut karena **hasil kerja** Ibu Wulan kelihatan dan **diakui** oleh tim.',
   hint:'Petunjuk: Yang Hendi lihat adalah hasilnya. Target tembus terus!'},
- {lv:4,boss:'Bapak Agus',f:'Frans',q:'Dulu saya masih bingung-bingung. Sekarang udah dipercaya buat bikin laporan, berkat bimbingan Bapak Agus.',
+ {lv:4,boss:'Bapak Agus',f:'Frans',q:'Dulu saya masih suka bingung. Berkat bimbingan Pak Agus, sekarang saya udah dipercaya sama manajemen.',
   look:{skin:'#B97E55',hair:'side',hc:'#151210',shirt:'#3AA76D'},
-  ex:'Frans ikut karena merasa **berkembang** selama dibimbing Bapak Agus.',
+  ex:'Frans nurut karena merasa **berkembang** selama dibimbing oleh Bapak Agus.',
   hint:'Petunjuk: Frans jadi jago karena dibimbing Bapak Agus.'},
  {lv:5,boss:'Bapak Bagas',f:'Kris',q:'Tiap Bapak Bagas pindah cabang, cabangnya ikut jadi bagus. Saya jadi hormat sama beliau karena prestasinya.',
   look:{skin:'#D39D73',hair:'grey',hc:'#B9BEC6',shirt:'#5B4BA8',stache:1},
-  ex:'Kris ikut karena **rasa hormat** pada pengalaman dan rekam jejak Bapak Bagas yang **sudah teruji**.',
+  ex:'Kris nurut karena **rasa hormat** pada pengalaman dan rekam jejak Bapak Bagas yang **sudah teruji**.',
   hint:'Petunjuk: Kris hormat karena rekam jejak Bapak Bagas di banyak cabang.'}
 ];
 
@@ -524,7 +524,7 @@ function person(L,mood){const s=L.skin,hc=L.hc;
 
 /* ---------- manifes order (ditampilkan saat perkenalan) ---------- */
 function houseIcon(k){return `<svg viewBox="-20 -40 40 42"><rect x="-15" y="-25" width="30" height="25" fill="${HOUSE[k][0]}" stroke="rgba(0,0,0,.15)"/><path d="M-19 -24 L0 -39 L19 -24Z" fill="${HOUSE[k][1]}"/><rect x="-4" y="-13" width="8" height="13" fill="#7A5233"/></svg>`}
-function manifest(){openPanel(head('📋','!','Daftar order hari ini','📦 5')+
+function manifest(){openPanel(head('📋','!','Daftar kiriman hari ini','📦 5')+
   `<div class="mf">${S.order.map((k,i)=>`<div>${houseIcon(k)}<b>${i+1}. Rumah ${esc(ORD[k].boss)}</b><small>⏳ belum diantar</small></div>`).join('')}</div>
    <div class="prow" style="min-height:22px"><div class="pt" style="min-height:0;justify-content:center;width:100%">👆 Ketuk layar untuk lanjut</div></div>`,true)}
 
@@ -577,7 +577,7 @@ const OBS={hole:`<ellipse rx="17" ry="5" cy="0" fill="#23272F"/><ellipse rx="17"
   cone:`<path d="M-9 0 L0 -26 L9 0Z" fill="#FF7A1A"/><rect x="-12" y="-3" width="24" height="5" rx="1.5" fill="#E2620F"/><path d="M-6 -8 h12 M-3.4 -16 h6.8" stroke="#fff" stroke-width="3.4"/>`};
 async function ride(o,idx){
   const first=idx===0;
-  openPanel(head(`🛵 ORDER ${idx+1}`,'1','Ketuk layar untuk **lompat** 🕳️',`🏠 ${o.boss}`)+rideSVG(o)+
+  openPanel(head(`🛵 Kiriman ${idx+1}`,'1','Ketuk layar untuk **lompat** 🕳️',`🏠 ${o.boss}`)+rideSVG(o)+
    `<div class="prow"><div class="trk"><i id="tf"></i><b id="tb">🛵</b><span>🏠</span></div><button class="bt sun" id="jp">⤴ Lompat</button></div>`);
   remark(first?'Gas ke rumah **'+o.boss+'**! Ada lubang & kerucut di jalan. **Ketuk layar** buat lompat ya.':`Meluncur ke rumah **${o.boss}**! Hati-hati di jalan, {p}.`,'jump');
   const svg=$('#rs'),bk=$('#bk'),bkb=$('#bkb'),far=$('#far'),mid=$('#mid'),dsh=$('#dsh'),dest=$('#dest'),obsG=$('#obs'),w1=$('#w1'),w2=$('#w2'),tf=$('#tf'),tb=$('#tb'),jp=$('#jp');
@@ -622,12 +622,12 @@ async function ride(o,idx){
 /* ---------- 2) SERAHKAN PAKET di pintu konsumen ---------- */
 async function handover(o,idx,left){
   const lv=LV[o.lv-1];
-  openPanel(head(`📦 ORDER ${idx+1}`,'2','**Serahkan paket** yang pas',`🏠 ${o.boss}`)+
+  openPanel(head(`📦 Kiriman ${idx+1}`,'2','**Serahkan paket** yang pas',`🏠 ${o.boss}`)+
    `<div class="door" id="dr"><div class="frame"><div class="boss" id="bs">${person(o.look,'n')}</div><div class="plate">${esc(o.boss)}</div></div>
      <div class="quote2"><span class="qw">💬 ${esc(o.f)} · tim ${esc(o.boss)}</span><p id="qq">${esc(o.q)}</p></div></div>
     <div class="bagh">🎒 Bagasi motor: <b>Tarik</b> atau <b>ketuk</b> paket yang pas</div>
     <div class="bag" id="bag">${left.map(n=>{const L=LV[n-1];return`<button class="pk" data-n="${n}" style="--c:${L.c}" aria-label="Paket: ${L.d} (${L.k})"><b>${L.d}</b><span>${L.n} · ${L.k==='People Development'?'People <br> Development':L.k}</span></button>`}).join('')}</div>
-    <div class="prow"><div class="pt" id="pt">Kenapa ${esc(o.f)} mau ikut ${esc(o.boss)}? Pilih paketnya.</div></div>`);
+    <div class="prow"><div class="pt" id="pt">Kenapa ${esc(o.f)} mau nurut sama ${esc(o.boss)}? Pilih paketnya.</div></div>`);
   const dr=$('#dr'),bs=$('#bs'),qq=$('#qq'),pks=$$('.pk',panel);
   let tries=0,busy=false;
   const showHint=()=>{const bg=$('#bag');if(bg)hintDrag(bg,bs)};
@@ -679,8 +679,8 @@ async function handover(o,idx,left){
 function stageClear(o,idx,stars,bon){const L=LV[o.lv-1];return new Promise(res=>{
   const c=h('div','clear',`<div class="unl">🔓 LEVEL TERBUKA</div><div class="big" style="--c:${L.c}"><b>${L.n}</b><span>${L.k}<small>${L.sub}</small></span></div>
    <div class="stars">${[0,1,2].map(k=>`<i>${k<stars?'⭐':'☆'}</i>`).join('')}</div>${bon?'<div class="bon">🛵 +1 ⭐ bonus jalan mulus</div>':''}
-   <div class="q">❓ Kenapa ${esc(o.f)} mau ikut ${esc(o.boss)}?</div><p>${fmt(o.ex)}</p>
-   <button class="bt wide">${idx<4?'Order berikutnya ▶':'Lihat hasil ▶'}</button>`,panel);
+   <div class="q">❓ Kenapa ${esc(o.f)} mau nurut sama ${esc(o.boss)}?</div><p>${fmt(o.ex)}</p>
+   <button class="bt wide">${idx<4?'Kiriman berikutnya ▶':'Lihat hasil ▶'}</button>`,panel);
   c.animate([{opacity:0,transform:'scale(.9)'},{opacity:1,transform:'none'}],{duration:400,easing:'cubic-bezier(.34,1.56,.64,1)'});
   $$('.stars i',c).forEach((e,k)=>e.animate([{transform:'scale(0) rotate(-90deg)'},{transform:'scale(1.4)'},{transform:'scale(1)'}],{duration:450,delay:300+k*180,fill:'backwards'}));
   hintLater(()=>hintTap($('.bt',c)),2600);
@@ -705,7 +705,7 @@ function startScreen(){return new Promise(res=>{
   $('.sCard',s).animate([{opacity:0,transform:'translateY(80px)'},{opacity:1,transform:'none'}],{duration:700,delay:400,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
   const inp=$('#nm',s),go=$('#go',s),pv=$('#pv',s);
   const upd=()=>{const n=inp.value.trim().replace(/\s+/g,' ');go.disabled=!(n&&S.sapa);
-    pv.innerHTML=S.sapa&&n?`Raka akan memanggil <b>${esc(S.sapa+' '+n)}</b> 👋`:!S.sapa?'Pilih sapaan: Bapak atau Ibu.':'Sekarang tulis nama panggilan.'};
+    pv.innerHTML=S.sapa&&n?`Raka akan memanggil <b>${esc(S.sapa+' '+n)}</b> 👋`:!S.sapa?'Pilih sapaan: Bapak atau Ibu.':'Sekarang tulis nama panggilanmu dulu ya.'};
   $$('.sapa button',s).forEach(b=>b.onclick=()=>{S.sapa=b.dataset.v;$$('.sapa button',s).forEach(x=>x.classList.toggle('on',x===b));SFX.pop();upd();if(!inp.value.trim())inp.focus()});
   inp.addEventListener('input',upd);
   const start=async()=>{const n=inp.value.trim().replace(/\s+/g,' ');if(!n||!S.sapa)return;S.name=n.slice(0,16);inp.blur();Snd.init();SFX.win();
@@ -724,9 +724,9 @@ function debrief(){
   const show=(html,cls)=>{const c=h('div','card deb '+(cls||''),html,ui);
     c.animate([{opacity:0,transform:'translateY(60px) scale(.95)'},{opacity:1,transform:'none'}],{duration:600,easing:'cubic-bezier(.34,1.56,.64,1)'});
     [...c.children].forEach((e,i)=>e.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'}],{duration:420,delay:220+i*80,fill:'backwards'}));return c};
-  const c=show(`<div class="hd2"><img class="dRaka" alt="Raka" src="${IMG}"><div class="bub2"><span class="chipM">💡 RANGKUMAN</span><div class="tx2">Hebat, <b>${esc(P())}</b>! Alasan tim mau ikut leader-nya bisa beda-beda. Ini <b>5 Level Kepemimpinan</b> dari John C. Maxwell:</div></div></div>
+  const c=show(`<div class="hd2"><img class="dRaka" alt="Raka" src="${IMG}"><div class="bub2"><span class="chipM">💡 RANGKUMAN</span><div class="tx2">Hebat, <b>${esc(P())}</b>! Alasan tim mau menuruti instruksi leader-nya bisa beda-beda. Ini <b>5 Level Kepemimpinan</b> dari John C. Maxwell:</div></div></div>
     <div class="gr">${LV.map(L=>`<div style="--c:${L.c}"><span class="L">${L.n}</span><div style="flex:1"><h4>${L.k} · ${L.sub}</h4><p>${esc(L.rc)}</p></div></div>`).join('')}</div>
-    <div class="own">Apapun level jabatan kita dan sudah berapa lama kita jadi leader, itu ga bisa jadi ukuran yang menunjukan level kepemimpinan kita lho. Yang jadi ukuran itu adalah alasan kenapa tim mau ikut sama kita.</div>
+    <div class="own">Ingat, apapun level jabatan kita dan sudah berapa lama kita jadi leader, itu ga bisa jadi ukuran yang menunjukan level kepemimpinan kita lho.</div>
     <div class="note">Rasa hormat butuh <b>waktu dan konsistensi</b>. Sampai ketemu di video berikutnya: <b>CARE</b>! 👋</div>
     <button class="bt wide" id="again">↺ Ulangi Gamifikasi</button>`);
   setTimeout(()=>{SFX.win();burst(40)},500);
@@ -742,16 +742,16 @@ async function main(){
   S.order=shuffle(ORD.map((_,i)=>i));
   $('#raka').animate([{transform:'translateX(-130%)'},{transform:'translateX(6%)',offset:.75},{transform:'none'}],{duration:800,easing:'cubic-bezier(.22,1,.36,1)'});
   await sleep(700);
-  await say('Halo, {p}! Salam kenal, saya **Raka**. Yuk, bantu saya kirim paket-paket ini!','jump',true);
+  await say('Halo, {p}! Salam kenal, saya **Raka**. Yuk, bantu saya kirim paket-paket ini ke alamat tujuannya!','jump',true);
   manifest();
-  await say('Hari ini ada **5 paket** buat **5 atasan**. Isinya: Alasan kenapa timnya mau ikut sama atasan itu.','nod');
-  await say('Tugas {p}: Antar pakai motor, dengar kata timnya, lalu **serahkan paket yang pas**. 🛵','jump');
+  await say('Hari ini ada **5 paket** buat **5 atasan**. Isinya: Alasan kenapa timnya mau nurut sama atasan itu.','nod');
+  await say('Tugas {p}: Baca isi paketnya, kemudian **serahkan paket yang pas**. 🛵','jump');
   closePanel();await sleep(300);
   let left=[1,2,3,4,5];
   for(let idx=0;idx<5;idx++){
     const k=S.order[idx],o=ORD[k];
     setSlots(idx);setTarget(k);moveMini(k);
-    await caption(`Order #${idx+1}`,`🏠 RUMAH ${o.boss.toUpperCase()}`);
+    await caption(`Kiriman #${idx+1}`,`🏠 RUMAH ${o.boss.toUpperCase()}`);
     const hits=await ride(o,idx);
     const tries=await handover(o,idx,left);
     left=left.filter(n=>n!==o.lv);
@@ -762,7 +762,7 @@ async function main(){
   }
   setSlots(5);setTarget(-1);moveMini(-1);
   await say('Semua paket terkirim, {p}! 🎉 Kelima atasan senang menerima paketnya.','jump');
-  await say('Sebelum pulang, yuk lihat lagi arti 5 alasan tadi.','nod');
+  await say('Sebelum balik, yuk kita ulas kembali inti dari permainannya.','nod');
   await wipe(async()=>{hideBub()});
   debrief();
 }
